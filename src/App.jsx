@@ -364,7 +364,7 @@ export default function KelvixHosting() {
         <div style={{display:"flex",flexDirection:"column",gap:22}}>
           <div style={{fontSize:20,fontWeight:700,color:C.primary}}>Kelvix Hosting</div>
           <p style={{fontSize:14.5,color:"#666",lineHeight:1.7,margin:0}}>Oulun ensimmäinen ammattimainen lyhytvuokrauksen hosting-palvelu. Sinä nautit tuotoista – me hoidamme kaiken muun.</p>
-          {[{ic:<MailIcon/>,t:"info@kelvixhosting.fi"},{ic:<PhoneIcon/>,t:"+358 XX XXX XXXX"},{ic:<MapIcon/>,t:"Oulu ja lähialueet"}].map((c,i)=>(
+          {[{ic:<MailIcon/>,t:"ville@kelvixhosting.com"},{ic:<PhoneIcon/>,t:"+358 XX XXX XXXX"},{ic:<MapIcon/>,t:"Oulu ja lähialueet"}].map((c,i)=>(
             <div key={i} style={{display:"flex",alignItems:"center",gap:13}}>
               <div style={{width:44,height:44,borderRadius:12,background:C.soft,color:C.primary,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{c.ic}</div>
               <span style={{fontSize:14.5,color:"#555"}}>{c.t}</span>
@@ -384,66 +384,14 @@ export default function KelvixHosting() {
     <section style={{...W,paddingTop:80,paddingBottom:80}} aria-label="Tietosuojaseloste">
       <Chip>Tietosuoja</Chip>
       <H2>Tietosuojaseloste</H2>
-      <p style={{fontSize:13,color:C.muted,marginBottom:40}}>Päivitetty: 11.5.2026 &middot; EU:n yleinen tietosuoja-asetus (GDPR) 2016/679</p>
-
-      {[
-        {t:"1. Rekisterinpitäjä",body:[
-          <><strong>Kelvix Oy</strong><br/>Oulu, Suomi<br/>Sähköposti: info@kelvixhosting.fi<br/>Puhelin: +358 XX XXX XXXX</>
-        ]},
-        {t:"2. Rekisterin nimi",body:["Kelvix Hosting asiakasrekisteri ja yhteydenottolomakkeen tietorekisteri."]},
-        {t:"3. Henkilötietojen käsittelyn tarkoitus ja oikeusperuste",body:[
-          "Käsittelemme henkilötietoja seuraaviin tarkoituksiin:",
-          <ul style={{margin:"8px 0 0 0",padding:"0 0 0 20px",fontSize:14,lineHeight:1.75,color:"#555"}}>
-            <li>Yhteydenottopyyntöjen ja asiakaskyselyjen käsittely</li>
-            <li>Palvelusopimuksen solmiminen, hallinta ja täyttäminen</li>
-            <li>Tuottoarvioiden ja tarjousten toimittaminen</li>
-            <li>Laskutus ja maksujen käsittely</li>
-            <li>Asiakassuhteen ylläpito ja asiakasviestintä</li>
-            <li>Lakisääteisten velvoitteiden täyttäminen</li>
-          </ul>,
-          "Käsittelyn oikeusperusteena on sopimuksen täytäntöönpano, rekisteröidyn suostumus sekä rekisterinpitäjän oikeutettu etu (asiakassuhteen hoitaminen)."
-        ]},
-        {t:"4. Rekisterin tietosisältö",body:[
-          "Rekisteri voi sisältää seuraavia henkilötietoja:",
-          <ul style={{margin:"8px 0 0 0",padding:"0 0 0 20px",fontSize:14,lineHeight:1.75,color:"#555"}}>
-            <li>Nimi, sähköpostiosoite, puhelinnumero</li>
-            <li>Kohteen osoite ja kiinteistön tiedot</li>
-            <li>Valittu palvelu tai palvelupyyntö</li>
-            <li>Viestintä- ja asiakashistoria</li>
-            <li>Sopimus- ja laskutustiedot</li>
-          </ul>
-        ]},
-        {t:"5. Säännönmukaiset tietolähteet",body:["Henkilötiedot kerätään rekisteröidyltä itseltään verkkosivun yhteydenottolomakkeen, sähköpostin tai puhelimen välityksellä."]},
-        {t:"6. Tietojen säännönmukainen luovuttaminen",body:["Henkilötietoja ei luovuteta ulkopuolisille ilman rekisteröidyn suostumusta, ellei lainsäädäntö sitä edellytä. Tietoja voidaan luovuttaa viranomaisille lain niin vaatiessa."]},
-        {t:"7. Tietojen siirto EU:n tai ETA:n ulkopuolelle",body:["Henkilötietoja ei siirretä EU:n tai ETA-alueen ulkopuolelle."]},
-        {t:"8. Tietojen säilytysaika",body:["Henkilötietoja säilytetään niin kauan kuin asiakassuhde on voimassa ja sen jälkeen kirjanpitolain edellyttämän ajan (6 vuotta). Yhteydenottolomakkeen tiedot, joista ei muodostu asiakassuhdetta, poistetaan 12 kuukauden kuluessa."]},
-        {t:"9. Rekisteröidyn oikeudet",body:[
-          "Rekisteröidyllä on seuraavat oikeudet:",
-          <ul style={{margin:"8px 0 0 0",padding:"0 0 0 20px",fontSize:14,lineHeight:1.75,color:"#555"}}>
-            <li><strong>Tarkastusoikeus:</strong> oikeus tarkastaa itseään koskevat tiedot</li>
-            <li><strong>Oikeus tietojen oikaisemiseen:</strong> oikeus vaatia virheellisten tietojen korjaamista</li>
-            <li><strong>Oikeus tietojen poistamiseen:</strong> oikeus pyytää tietojen poistamista ("oikeus tulla unohdetuksi")</li>
-            <li><strong>Oikeus käsittelyn rajoittamiseen:</strong> oikeus vaatia käsittelyn rajoittamista tietyissä tilanteissa</li>
-            <li><strong>Oikeus siirtää tiedot järjestelmästä toiseen</strong></li>
-            <li><strong>Oikeus peruuttaa suostumus</strong> milloin tahansa</li>
-            <li><strong>Oikeus tehdä valitus valvontaviranomaiselle</strong> (Tietosuojavaltuutettu, tietosuoja.fi)</li>
-          </ul>,
-          "Oikeuksien käyttämistä koskevat pyynnöt lähetetään sähköpostitse osoitteeseen info@kelvixhosting.fi."
-        ]},
-        {t:"10. Tietoturva",body:["Rekisterin tiedot on suojattu asianmukaisin teknisin ja organisatorisin toimenpitein. Tietoja käsittelevät vain ne henkilöt, joiden työtehtävät sitä edellyttävät. Käytämme SSL-salattua yhteyttä tiedonsiirron suojaamiseen."]},
-        {t:"11. Evästeet",body:["Verkkosivumme saattaa käyttää teknisiä evästeitä sivuston toiminnan varmistamiseen. Emme käytä markkinointi- tai seurantaevästeitä ilman suostumustasi."]},
-        {t:"12. Tietosuojaselosteen muutokset",body:["Pidätämme oikeuden päivittää tätä tietosuojaselostetta. Muutoksista ilmoitetaan verkkosivullamme. Merkittävistä muutoksista ilmoitetaan rekisteröidyille erikseen."]},
-        {t:"13. Yhteystiedot",body:[<>Tietosuoja-asioissa ota yhteyttä: <strong>info@kelvixhosting.fi</strong></>]},
-      ].map((sec,i)=>(
-        <div key={i} style={{marginBottom:32,paddingBottom:32,borderBottom:i<12?`1px solid ${C.soft}`:"none"}}>
-          <h3 style={{fontSize:17,fontWeight:700,color:C.primary,marginBottom:12}}>{sec.t}</h3>
-          {sec.body.map((b,j)=>(
-            typeof b === "string"
-              ? <p key={j} style={{fontSize:14.5,lineHeight:1.75,color:"#555",margin:"0 0 8px 0"}}>{b}</p>
-              : <div key={j}>{b}</div>
-          ))}
-        </div>
-      ))}
+      <div style={{maxWidth:720}}>
+        <p style={{fontSize:14.5,lineHeight:1.75,color:"#555",marginBottom:16}}><strong>Rekisterinpitäjä:</strong> Kelvix Oy, Oulu, Suomi. Sähköposti: ville@kelvixhosting.com</p>
+        <p style={{fontSize:14.5,lineHeight:1.75,color:"#555",marginBottom:16}}>Keräämme seuraavia henkilötietoja: nimi, sähköpostiosoite, puhelinnumero yhteydenottolomakkeen kautta. Tietoja käytetään ainoastaan yhteydenottopyyntöihin vastaamiseen.</p>
+        <p style={{fontSize:14.5,lineHeight:1.75,color:"#555",marginBottom:16}}>Käytämme Google Analytics -palvelua sivuston kävijätilastointiin. Google Analytics kerää anonymisoitua tietoa evästeiden avulla. Voit estää seurannan selaimesi asetuksista.</p>
+        <p style={{fontSize:14.5,lineHeight:1.75,color:"#555",marginBottom:16}}>Emme myy tai luovuta henkilötietoja kolmansille osapuolille. Tietoja säilytetään niin kauan kuin on tarpeen yhteydenoton käsittelyä varten.</p>
+        <p style={{fontSize:14.5,lineHeight:1.75,color:"#555",marginBottom:16}}>Sinulla on GDPR:n mukaisesti oikeus tarkastaa, korjata tai poistaa tietosi ottamalla yhteyttä: ville@kelvixhosting.com</p>
+        <p style={{fontSize:14.5,lineHeight:1.75,color:"#555",marginBottom:0}}>Tietosuojaseloste on laadittu EU:n yleisen tietosuoja-asetuksen (GDPR, 2016/679) mukaisesti.</p>
+      </div>
     </section>
   );
 
