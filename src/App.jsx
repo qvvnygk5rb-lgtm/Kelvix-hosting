@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const PAGES = ["etusivu","palvelut","hinnat","meista","yhteystiedot"];
+const PAGES = ["etusivu","palvelut","hinnat","meista","yhteystiedot","tietosuoja"];
 
 /* ── ICONS ── */
 const KeyIcon=({size=24})=><svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>;
@@ -379,6 +379,74 @@ export default function KelvixHosting() {
     </section>
   );
 
+  /* ═══════════ TIETOSUOJA ═══════════ */
+  const Tietosuoja=()=>(
+    <section style={{...W,paddingTop:80,paddingBottom:80}} aria-label="Tietosuojaseloste">
+      <Chip>Tietosuoja</Chip>
+      <H2>Tietosuojaseloste</H2>
+      <p style={{fontSize:13,color:C.muted,marginBottom:40}}>Päivitetty: 11.5.2026 &middot; EU:n yleinen tietosuoja-asetus (GDPR) 2016/679</p>
+
+      {[
+        {t:"1. Rekisterinpitäjä",body:[
+          <><strong>Kelvix Oy</strong><br/>Oulu, Suomi<br/>Sähköposti: info@kelvixhosting.fi<br/>Puhelin: +358 XX XXX XXXX</>
+        ]},
+        {t:"2. Rekisterin nimi",body:["Kelvix Hosting asiakasrekisteri ja yhteydenottolomakkeen tietorekisteri."]},
+        {t:"3. Henkilötietojen käsittelyn tarkoitus ja oikeusperuste",body:[
+          "Käsittelemme henkilötietoja seuraaviin tarkoituksiin:",
+          <ul style={{margin:"8px 0 0 0",padding:"0 0 0 20px",fontSize:14,lineHeight:1.75,color:"#555"}}>
+            <li>Yhteydenottopyyntöjen ja asiakaskyselyjen käsittely</li>
+            <li>Palvelusopimuksen solmiminen, hallinta ja täyttäminen</li>
+            <li>Tuottoarvioiden ja tarjousten toimittaminen</li>
+            <li>Laskutus ja maksujen käsittely</li>
+            <li>Asiakassuhteen ylläpito ja asiakasviestintä</li>
+            <li>Lakisääteisten velvoitteiden täyttäminen</li>
+          </ul>,
+          "Käsittelyn oikeusperusteena on sopimuksen täytäntöönpano, rekisteröidyn suostumus sekä rekisterinpitäjän oikeutettu etu (asiakassuhteen hoitaminen)."
+        ]},
+        {t:"4. Rekisterin tietosisältö",body:[
+          "Rekisteri voi sisältää seuraavia henkilötietoja:",
+          <ul style={{margin:"8px 0 0 0",padding:"0 0 0 20px",fontSize:14,lineHeight:1.75,color:"#555"}}>
+            <li>Nimi, sähköpostiosoite, puhelinnumero</li>
+            <li>Kohteen osoite ja kiinteistön tiedot</li>
+            <li>Valittu palvelu tai palvelupyyntö</li>
+            <li>Viestintä- ja asiakashistoria</li>
+            <li>Sopimus- ja laskutustiedot</li>
+          </ul>
+        ]},
+        {t:"5. Säännönmukaiset tietolähteet",body:["Henkilötiedot kerätään rekisteröidyltä itseltään verkkosivun yhteydenottolomakkeen, sähköpostin tai puhelimen välityksellä."]},
+        {t:"6. Tietojen säännönmukainen luovuttaminen",body:["Henkilötietoja ei luovuteta ulkopuolisille ilman rekisteröidyn suostumusta, ellei lainsäädäntö sitä edellytä. Tietoja voidaan luovuttaa viranomaisille lain niin vaatiessa."]},
+        {t:"7. Tietojen siirto EU:n tai ETA:n ulkopuolelle",body:["Henkilötietoja ei siirretä EU:n tai ETA-alueen ulkopuolelle."]},
+        {t:"8. Tietojen säilytysaika",body:["Henkilötietoja säilytetään niin kauan kuin asiakassuhde on voimassa ja sen jälkeen kirjanpitolain edellyttämän ajan (6 vuotta). Yhteydenottolomakkeen tiedot, joista ei muodostu asiakassuhdetta, poistetaan 12 kuukauden kuluessa."]},
+        {t:"9. Rekisteröidyn oikeudet",body:[
+          "Rekisteröidyllä on seuraavat oikeudet:",
+          <ul style={{margin:"8px 0 0 0",padding:"0 0 0 20px",fontSize:14,lineHeight:1.75,color:"#555"}}>
+            <li><strong>Tarkastusoikeus:</strong> oikeus tarkastaa itseään koskevat tiedot</li>
+            <li><strong>Oikeus tietojen oikaisemiseen:</strong> oikeus vaatia virheellisten tietojen korjaamista</li>
+            <li><strong>Oikeus tietojen poistamiseen:</strong> oikeus pyytää tietojen poistamista ("oikeus tulla unohdetuksi")</li>
+            <li><strong>Oikeus käsittelyn rajoittamiseen:</strong> oikeus vaatia käsittelyn rajoittamista tietyissä tilanteissa</li>
+            <li><strong>Oikeus siirtää tiedot järjestelmästä toiseen</strong></li>
+            <li><strong>Oikeus peruuttaa suostumus</strong> milloin tahansa</li>
+            <li><strong>Oikeus tehdä valitus valvontaviranomaiselle</strong> (Tietosuojavaltuutettu, tietosuoja.fi)</li>
+          </ul>,
+          "Oikeuksien käyttämistä koskevat pyynnöt lähetetään sähköpostitse osoitteeseen info@kelvixhosting.fi."
+        ]},
+        {t:"10. Tietoturva",body:["Rekisterin tiedot on suojattu asianmukaisin teknisin ja organisatorisin toimenpitein. Tietoja käsittelevät vain ne henkilöt, joiden työtehtävät sitä edellyttävät. Käytämme SSL-salattua yhteyttä tiedonsiirron suojaamiseen."]},
+        {t:"11. Evästeet",body:["Verkkosivumme saattaa käyttää teknisiä evästeitä sivuston toiminnan varmistamiseen. Emme käytä markkinointi- tai seurantaevästeitä ilman suostumustasi."]},
+        {t:"12. Tietosuojaselosteen muutokset",body:["Pidätämme oikeuden päivittää tätä tietosuojaselostetta. Muutoksista ilmoitetaan verkkosivullamme. Merkittävistä muutoksista ilmoitetaan rekisteröidyille erikseen."]},
+        {t:"13. Yhteystiedot",body:[<>Tietosuoja-asioissa ota yhteyttä: <strong>info@kelvixhosting.fi</strong></>]},
+      ].map((sec,i)=>(
+        <div key={i} style={{marginBottom:32,paddingBottom:32,borderBottom:i<12?`1px solid ${C.soft}`:"none"}}>
+          <h3 style={{fontSize:17,fontWeight:700,color:C.primary,marginBottom:12}}>{sec.t}</h3>
+          {sec.body.map((b,j)=>(
+            typeof b === "string"
+              ? <p key={j} style={{fontSize:14.5,lineHeight:1.75,color:"#555",margin:"0 0 8px 0"}}>{b}</p>
+              : <div key={j}>{b}</div>
+          ))}
+        </div>
+      ))}
+    </section>
+  );
+
   /* ═══════════ LAYOUT ═══════════ */
   return (
     <div style={{width:"100%",height:"100vh",display:"flex",flexDirection:"column",fontFamily:"'DM Sans','Helvetica Neue',sans-serif",background:C.light,color:C.primary,overflow:"hidden"}}>
@@ -397,14 +465,14 @@ export default function KelvixHosting() {
           <div style={{fontSize:21,fontWeight:700,letterSpacing:"-0.5px",cursor:"pointer",display:"flex",alignItems:"center",gap:9,color:C.primary}} onClick={()=>go("etusivu")}>
             <span style={{color:C.accent}}><KeyIcon size={20}/></span>Kelvix<span style={{color:C.accent}}>Hosting</span>
           </div>
-          {!isMob&&<div style={{display:"flex",gap:28,alignItems:"center"}}>{PAGES.map(p=><span key={p} role="link" tabIndex={0} style={{fontSize:13,fontWeight:page===p?600:400,cursor:"pointer",color:page===p?C.accent:C.muted,textTransform:"uppercase",letterSpacing:"1.5px",borderBottom:page===p?`2px solid ${C.accent}`:"2px solid transparent",paddingBottom:3,transition:"all 0.2s"}} onClick={()=>go(p)} onKeyDown={e=>e.key==='Enter'&&go(p)}>{p==="meista"?"Meistä":p.charAt(0).toUpperCase()+p.slice(1)}</span>)}</div>}
+          {!isMob&&<div style={{display:"flex",gap:28,alignItems:"center"}}>{PAGES.map(p=><span key={p} role="link" tabIndex={0} style={{fontSize:13,fontWeight:page===p?600:400,cursor:"pointer",color:page===p?C.accent:C.primary,textTransform:"uppercase",letterSpacing:"1.5px",borderBottom:page===p?`2px solid ${C.accent}`:"2px solid transparent",paddingBottom:3,transition:"all 0.2s"}} onClick={()=>go(p)} onKeyDown={e=>e.key==='Enter'&&go(p)}>{p==="meista"?"Meistä":p==="tietosuoja"?"Tietosuoja":p.charAt(0).toUpperCase()+p.slice(1)}</span>)}</div>}
           {isMob&&<button style={{cursor:"pointer",background:"none",border:"none",padding:6}} onClick={()=>setMenuOpen(true)} aria-label="Avaa valikko"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={C.primary} strokeWidth="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>}
         </div>
       </nav>
 
       {menuOpen&&<div style={{position:"fixed",inset:0,background:"rgba(247,245,242,0.98)",zIndex:200,display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:30,animation:"fadeUp 0.3s ease"}} role="dialog">
         <button style={{position:"absolute",top:20,right:20,background:"none",border:"none",fontSize:32,cursor:"pointer",color:C.primary}} onClick={()=>setMenuOpen(false)}>&times;</button>
-        {PAGES.map(p=><span key={p} role="link" tabIndex={0} style={{fontSize:22,fontWeight:600,cursor:"pointer",textTransform:"uppercase",letterSpacing:"3px",color:page===p?C.accent:C.primary}} onClick={()=>go(p)}>{p==="meista"?"Meistä":p.charAt(0).toUpperCase()+p.slice(1)}</span>)}
+        {PAGES.map(p=><span key={p} role="link" tabIndex={0} style={{fontSize:22,fontWeight:600,cursor:"pointer",textTransform:"uppercase",letterSpacing:"3px",color:page===p?C.accent:C.primary}} onClick={()=>go(p)}>{p==="meista"?"Meistä":p==="tietosuoja"?"Tietosuoja":p.charAt(0).toUpperCase()+p.slice(1)}</span>)}
       </div>}
 
       <main ref={ref} style={{flex:1,overflowY:"auto",overflowX:"hidden"}}>
@@ -413,6 +481,7 @@ export default function KelvixHosting() {
         {page==="hinnat"&&<Hinnat/>}
         {page==="meista"&&<Meista/>}
         {page==="yhteystiedot"&&<Yhteystiedot/>}
+        {page==="tietosuoja"&&<Tietosuoja/>}
 
         <footer style={{borderTop:`1px solid ${C.soft}`,padding:"40px clamp(16px,4vw,48px)",textAlign:"center",fontSize:12,color:C.muted}}>
           <div style={{maxWidth:1100,margin:"0 auto"}}>
@@ -421,7 +490,10 @@ export default function KelvixHosting() {
               <span style={{fontWeight:600,fontSize:13,color:C.primary}}>Kelvix Hosting</span>
             </div>
             <div>Kelvix Oy &middot; Oulu, Suomi &middot; Y-tunnus: XXXXXXX-X &middot; &copy; 2026</div>
-            <nav style={{marginTop:10,fontSize:11,color:C.muted}} aria-label="Avainsanat">
+            <div style={{marginTop:10,fontSize:12}}>
+              <span role="link" tabIndex={0} style={{color:C.accent,cursor:"pointer",textDecoration:"underline"}} onClick={()=>go("tietosuoja")}>Tietosuojaseloste</span>
+            </div>
+            <nav style={{marginTop:8,fontSize:11,color:C.muted}} aria-label="Avainsanat">
               Airbnb-hallinnointi Oulu &middot; Booking.com-hallinnointi Oulu &middot; Lyhytaikainen vuokraus Oulu &middot; Avainpalvelu Oulu &middot; Airbnb hosting Oulu &middot; Vuokra-asunnon hallinta Oulu &middot; Oulu 2026 majoitus &middot; Kiinteistön hallinnointi Oulu
             </nav>
           </div>
