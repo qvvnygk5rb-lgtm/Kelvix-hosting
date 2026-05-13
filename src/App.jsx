@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useForm } from "@formspree/react";
 
 const PAGES = ["etusivu","palvelut","hinnat","meista","yhteystiedot","tietosuoja"];
 
@@ -329,7 +330,9 @@ export default function KelvixHosting() {
   );
 
   /* ═══════════ YHTEYSTIEDOT ═══════════ */
-  const Yhteystiedot=()=>(
+  const Yhteystiedot=()=>{
+    const [state, handleSubmit] = useForm("mwvyzyjv");
+    return (
     <section style={{...W,paddingTop:80,paddingBottom:40}} aria-label="Yhteystiedot">
       <Chip>Ota yhteyttä</Chip>
       <H2>Kerro kohteestasi</H2>
@@ -337,28 +340,28 @@ export default function KelvixHosting() {
 
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(min(100%,300px),1fr))",gap:40,marginTop:44,marginBottom:80}}>
         <div>
-          {formSent?(
+          {state.succeeded?(
             <div style={{background:`rgba(193,127,62,0.05)`,borderRadius:18,padding:44,textAlign:"center"}}>
               <div style={{fontSize:52,marginBottom:16,color:C.accent}}>&#10003;</div>
-              <div style={{fontSize:22,fontWeight:700,marginBottom:8,color:C.primary}}>Kiitos yhteydenotostasi!</div>
-              <p style={{color:"#666",fontSize:15}}>Palaamme asiaan 24 tunnin sisällä tuottoarviolla.</p>
+              <div style={{fontSize:22,fontWeight:700,marginBottom:8,color:C.primary}}>Kiitos yhteydenotosta!</div>
+              <p style={{color:"#666",fontSize:15}}>Palaamme asiaan pian.</p>
             </div>
           ):(
-            <>
-              <input style={inputStyle} placeholder="Nimesi *" value={formData.name} onChange={e=>setFormData({...formData,name:e.target.value})}/>
-              <input style={inputStyle} placeholder="Sähköposti *" type="email" value={formData.email} onChange={e=>setFormData({...formData,email:e.target.value})}/>
-              <input style={inputStyle} placeholder="Puhelinnumero" value={formData.phone} onChange={e=>setFormData({...formData,phone:e.target.value})}/>
-              <input style={inputStyle} placeholder="Kohteen osoite (jos tiedossa)" value={formData.address} onChange={e=>setFormData({...formData,address:e.target.value})}/>
-              <select style={{...inputStyle,appearance:"auto"}} value={formData.service} onChange={e=>setFormData({...formData,service:e.target.value})}>
+            <form onSubmit={handleSubmit}>
+              <input style={inputStyle} placeholder="Nimesi *" name="nimi" required/>
+              <input style={inputStyle} placeholder="Sähköposti *" type="email" name="sähköposti" required/>
+              <input style={inputStyle} placeholder="Puhelinnumero" name="puhelinnumero"/>
+              <input style={inputStyle} placeholder="Kohteen osoite (jos tiedossa)" name="osoite"/>
+              <select style={{...inputStyle,appearance:"auto"}} name="palvelu">
                 <option value="">Mikä palvelu kiinnostaa?</option>
                 <option value="avainpalvelu">Avainpalvelu (alk. 29 €/vaihto)</option>
                 <option value="taysi">Täysi hallinta (25 % komissio)</option>
                 <option value="kevyt">Kevyt hallinta (15 % komissio)</option>
                 <option value="en-tieda">En tiedä vielä – haluan tuottoarvion</option>
               </select>
-              <textarea style={{...inputStyle,minHeight:120,resize:"vertical"}} placeholder="Kerro kohteestasi – missä päin Oulua, millainen asunto, mikä tilanne nyt..." value={formData.message} onChange={e=>setFormData({...formData,message:e.target.value})}/>
-              <Btn onClick={()=>{if(formData.name&&formData.email) setFormSent(true);}} style={{width:"100%",justifyContent:"center"}}>Lähetä ja pyydä tuottoarvio</Btn>
-            </>
+              <textarea style={{...inputStyle,minHeight:120,resize:"vertical"}} placeholder="Kerro kohteestasi – missä päin Oulua, millainen asunto, mikä tilanne nyt..." name="viesti"/>
+              <button type="submit" disabled={state.submitting} style={{display:"inline-flex",alignItems:"center",gap:9,background:C.primary,color:"#fff",padding:"15px 34px",borderRadius:50,fontSize:14.5,fontWeight:600,cursor:"pointer",border:"none",letterSpacing:"0.3px",transition:"transform 0.2s, box-shadow 0.3s",width:"100%",justifyContent:"center"}}>Lähetä ja pyydä tuottoarvio</button>
+            </form>
           )}
         </div>
         <div style={{display:"flex",flexDirection:"column",gap:22}}>
@@ -377,7 +380,8 @@ export default function KelvixHosting() {
         </div>
       </div>
     </section>
-  );
+    );
+  };
 
   /* ═══════════ TIETOSUOJA ═══════════ */
   const Tietosuoja=()=>(
