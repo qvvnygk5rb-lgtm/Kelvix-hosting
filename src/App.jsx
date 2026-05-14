@@ -78,7 +78,7 @@ export default function KelvixHosting() {
             Lopeta stressaaminen. Anna meidän hoitaa kaikki – avainten luovutuksesta siivoukseen ja vierasviestintään. Sinun ainoa tehtäväsi on nauttia tuotoista tililtäsi.
           </p>
           <div style={{display:"flex",gap:14,flexWrap:"wrap"}}>
-            <Btn onClick={()=>go("yhteystiedot")}>Pyydä ilmainen tuottoarvio <ArrowIcon/></Btn>
+            <Btn onClick={()=>go("yhteystiedot")}>Pyydä tarjousta <ArrowIcon/></Btn>
             <BtnO onClick={()=>go("palvelut")}>Katso palvelut</BtnO>
           </div>
         </div>
@@ -161,7 +161,7 @@ export default function KelvixHosting() {
           <div style={{position:"absolute",width:200,height:200,borderRadius:"50%",background:"rgba(193,127,62,0.06)",bottom:-60,left:-60,pointerEvents:"none"}}/>
           <h2 style={{fontSize:"clamp(22px,3.5vw,34px)",fontWeight:700,color:"#fff",marginBottom:14,letterSpacing:"-0.5px",position:"relative"}}>Lopeta päänvaiva. Aloita tuottaminen.</h2>
           <p style={{fontSize:15,color:"rgba(255,255,255,0.45)",maxWidth:460,margin:"0 auto 30px",position:"relative"}}>Kerro kohteestasi – saat ilmaisen tuottoarvion 24 tunnin sisällä. Ei sitoumuksia.</p>
-          <BtnA onClick={()=>go("yhteystiedot")} style={{position:"relative"}}>Pyydä tuottoarvio</BtnA>
+          <BtnA onClick={()=>go("yhteystiedot")} style={{position:"relative"}}>Pyydä tarjousta</BtnA>
         </div>
       </section>
     </>
@@ -277,7 +277,7 @@ export default function KelvixHosting() {
             <div style={{fontSize:38,fontWeight:700,color:C.accent,letterSpacing:"-1px",marginBottom:2}}>{p.pr}</div>
             <div style={{fontSize:13,color:p.f?"rgba(255,255,255,0.4)":C.muted,marginBottom:24}}>{p.un}</div>
             {p.ft.map((ft,j)=><div key={j} style={{display:"flex",alignItems:"flex-start",gap:9,fontSize:13,lineHeight:1.6,color:p.f?"rgba(255,255,255,0.7)":"#555",marginBottom:9}}><span style={{color:C.accent,flexShrink:0}}><CheckIcon size={13}/></span>{ft}</div>)}
-            <button style={{marginTop:"auto",paddingTop:22,background:p.f?C.accent:"transparent",color:p.f?"#fff":C.primary,border:p.f?"none":`2px solid ${C.primary}`,borderRadius:50,padding:"13px 22px",fontSize:13.5,fontWeight:600,cursor:"pointer",textAlign:"center",width:"100%",transition:"all 0.2s"}} onClick={()=>go("yhteystiedot")}>{p.f?"Pyydä tuottoarvio":"Ota yhteyttä"}</button>
+            <button style={{marginTop:"auto",paddingTop:22,background:p.f?C.accent:"transparent",color:p.f?"#fff":C.primary,border:p.f?"none":`2px solid ${C.primary}`,borderRadius:50,padding:"13px 22px",fontSize:13.5,fontWeight:600,cursor:"pointer",textAlign:"center",width:"100%",transition:"all 0.2s"}} onClick={()=>go("yhteystiedot")}>{p.f?"Pyydä tarjousta":"Ota yhteyttä"}</button>
           </div>
         ))}
       </div>
@@ -335,7 +335,7 @@ export default function KelvixHosting() {
     return (
     <section style={{...W,paddingTop:80,paddingBottom:40}} aria-label="Yhteystiedot">
       <Chip>Ota yhteyttä</Chip>
-      <H2>Kerro kohteestasi</H2>
+      <H2>Pyydä ilmainen tarjous</H2>
       <Sub>Vastaamme jokaiseen yhteydenottoon 24 tunnin sisällä ilmaisella tuottoarviolla. Ei sido sinua mihinkään.</Sub>
 
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(min(100%,300px),1fr))",gap:40,marginTop:44,marginBottom:80}}>
@@ -359,15 +359,15 @@ export default function KelvixHosting() {
                 <option value="kevyt">Kevyt hallinta (15 % komissio)</option>
                 <option value="en-tieda">En tiedä vielä – haluan tuottoarvion</option>
               </select>
-              <textarea style={{...inputStyle,minHeight:120,resize:"vertical"}} placeholder="Kerro kohteestasi – missä päin Oulua, millainen asunto, mikä tilanne nyt..." name="viesti"/>
-              <button type="submit" disabled={state.submitting} style={{display:"inline-flex",alignItems:"center",gap:9,background:C.primary,color:"#fff",padding:"15px 34px",borderRadius:50,fontSize:14.5,fontWeight:600,cursor:"pointer",border:"none",letterSpacing:"0.3px",transition:"transform 0.2s, box-shadow 0.3s",width:"100%",justifyContent:"center"}}>Lähetä ja pyydä tuottoarvio</button>
+              <textarea style={{...inputStyle,minHeight:120,resize:"vertical"}} placeholder="Kerro kohteestasi (osoite, huoneiden määrä, onko jo Airbnb:ssä)" name="viesti"/>
+              <button type="submit" disabled={state.submitting} style={{display:"inline-flex",alignItems:"center",gap:9,background:C.primary,color:"#fff",padding:"15px 34px",borderRadius:50,fontSize:14.5,fontWeight:600,cursor:"pointer",border:"none",letterSpacing:"0.3px",transition:"transform 0.2s, box-shadow 0.3s",width:"100%",justifyContent:"center"}}>Lähetä tarjouspyyntö</button>
             </form>
           )}
         </div>
         <div style={{display:"flex",flexDirection:"column",gap:22}}>
           <div style={{fontSize:20,fontWeight:700,color:C.primary}}>Kelvix Hosting</div>
           <p style={{fontSize:14.5,color:"#666",lineHeight:1.7,margin:0}}>Oulun ensimmäinen ammattimainen lyhytvuokrauksen hosting-palvelu. Sinä nautit tuotoista – me hoidamme kaiken muun.</p>
-          {[{ic:<MailIcon/>,t:"ville@kelvixhosting.com"},{ic:<PhoneIcon/>,t:"+358 XX XXX XXXX"},{ic:<MapIcon/>,t:"Oulu ja lähialueet"}].map((c,i)=>(
+          {[{ic:<MailIcon/>,t:"ville@kelvixhosting.com"},{ic:<PhoneIcon/>,t:"040 965 6825"},{ic:<MapIcon/>,t:"Oulu ja lähialueet"}].map((c,i)=>(
             <div key={i} style={{display:"flex",alignItems:"center",gap:13}}>
               <div style={{width:44,height:44,borderRadius:12,background:C.soft,color:C.primary,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>{c.ic}</div>
               <span style={{fontSize:14.5,color:"#555"}}>{c.t}</span>
