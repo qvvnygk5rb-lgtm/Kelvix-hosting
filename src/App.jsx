@@ -348,7 +348,7 @@ export default function KelvixHosting() {
             </div>
           ):(
             <form onSubmit={handleSubmit}>
-              <input style={inputStyle} placeholder="Nimesi *" name="nimi" required/>
+              <input style={inputStyle} placeholder="Nimesi *" name="name" required/>
               <input style={inputStyle} placeholder="Sähköposti *" type="email" name="sähköposti" required/>
               <input style={inputStyle} placeholder="Puhelinnumero" name="puhelinnumero"/>
               <input style={inputStyle} placeholder="Kohteen osoite (jos tiedossa)" name="osoite"/>
