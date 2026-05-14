@@ -27,8 +27,6 @@ export default function KelvixHosting() {
   const [page, setPage] = useState("etusivu");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const [formData, setFormData] = useState({name:"",email:"",phone:"",message:"",service:"",address:""});
-  const [formSent, setFormSent] = useState(false);
   const [vis, setVis] = useState({});
   const ref = useRef(null);
 
@@ -160,7 +158,7 @@ export default function KelvixHosting() {
         <div style={{background:C.dark,borderRadius:24,padding:"clamp(32px,5vw,60px)",textAlign:"center",position:"relative",overflow:"hidden"}}>
           <div style={{position:"absolute",width:200,height:200,borderRadius:"50%",background:"rgba(193,127,62,0.06)",bottom:-60,left:-60,pointerEvents:"none"}}/>
           <h2 style={{fontSize:"clamp(22px,3.5vw,34px)",fontWeight:700,color:"#fff",marginBottom:14,letterSpacing:"-0.5px",position:"relative"}}>Lopeta päänvaiva. Aloita tuottaminen.</h2>
-          <p style={{fontSize:15,color:"rgba(255,255,255,0.45)",maxWidth:460,margin:"0 auto 30px",position:"relative"}}>Kerro kohteestasi – saat ilmaisen tuottoarvion 24 tunnin sisällä. Ei sitoumuksia.</p>
+          <p style={{fontSize:15,color:"rgba(255,255,255,0.45)",maxWidth:460,margin:"0 auto 30px",position:"relative"}}>Kerro kohteestasi – saat ilmaisen tarjouksen 24 tunnin sisällä. Ei sitoumuksia.</p>
           <BtnA onClick={()=>go("yhteystiedot")} style={{position:"relative"}}>Pyydä tarjousta</BtnA>
         </div>
       </section>
@@ -307,7 +305,7 @@ export default function KelvixHosting() {
 
       <div data-s="steps" style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(min(100%,240px),1fr))",gap:20,marginTop:48,marginBottom:56}}>
         {[
-          {n:"01",t:"Kerro kohteestasi",txt:"Ota yhteyttä ja kerro asunnostasi. Teemme ilmaisen tuottoarvion – ei sitoumuksia, ei velvoitteita. Ei pientä pränttiä."},
+          {n:"01",t:"Kerro kohteestasi",txt:"Ota yhteyttä ja kerro asunnostasi. Teemme ilmaisen tarjouksen – ei sitoumuksia, ei velvoitteita. Ei pientä pränttiä."},
           {n:"02",t:"Me valmistelemme kaiken",txt:"Valokuvaamme kohteen, luomme optimoidut ilmoitukset ja valmistelemme asunnon ensimmäisiä vieraita varten. Sinun ei tarvitse tehdä mitään."},
           {n:"03",t:"Varaukset alkavat tulla",txt:"Hoidamme kaiken viestinnän, avainten luovutuksen, siivouksen ja huollon. Sinä voit unohtaa koko homman – se on meidän työmme."},
           {n:"04",t:"Sinä nautit tuotoista",txt:"Rahat tilillesi, selkeä kuukausiraportti ja mielenrauha siitä, että asuntosi on hyvissä käsissä. Sinä vain nautit."},
@@ -336,7 +334,7 @@ export default function KelvixHosting() {
     <section style={{...W,paddingTop:80,paddingBottom:40}} aria-label="Yhteystiedot">
       <Chip>Ota yhteyttä</Chip>
       <H2>Pyydä ilmainen tarjous</H2>
-      <Sub>Vastaamme jokaiseen yhteydenottoon 24 tunnin sisällä ilmaisella tuottoarviolla. Ei sido sinua mihinkään.</Sub>
+      <Sub>Vastaamme jokaiseen yhteydenottoon 24 tunnin sisällä. Ei sido sinua mihinkään.</Sub>
 
       <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(min(100%,300px),1fr))",gap:40,marginTop:44,marginBottom:80}}>
         <div>
@@ -351,13 +349,12 @@ export default function KelvixHosting() {
               <input style={inputStyle} placeholder="Nimesi *" name="name" required/>
               <input style={inputStyle} placeholder="Sähköposti *" type="email" name="email" required/>
               <input style={inputStyle} placeholder="Puhelinnumero" name="puhelinnumero"/>
-              <input style={inputStyle} placeholder="Kohteen osoite (jos tiedossa)" name="osoite"/>
               <select style={{...inputStyle,appearance:"auto"}} name="palvelu">
                 <option value="">Mikä palvelu kiinnostaa?</option>
                 <option value="avainpalvelu">Avainpalvelu (alk. 29 €/vaihto)</option>
                 <option value="taysi">Täysi hallinta (25 % komissio)</option>
                 <option value="kevyt">Kevyt hallinta (15 % komissio)</option>
-                <option value="en-tieda">En tiedä vielä – haluan tuottoarvion</option>
+                <option value="en-tieda">En tiedä vielä – haluan tarjouksen</option>
               </select>
               <textarea style={{...inputStyle,minHeight:120,resize:"vertical"}} placeholder="Kerro kohteestasi (osoite, huoneiden määrä, onko jo Airbnb:ssä)" name="viesti"/>
               <button type="submit" disabled={state.submitting} style={{display:"inline-flex",alignItems:"center",gap:9,background:C.primary,color:"#fff",padding:"15px 34px",borderRadius:50,fontSize:14.5,fontWeight:600,cursor:"pointer",border:"none",letterSpacing:"0.3px",transition:"transform 0.2s, box-shadow 0.3s",width:"100%",justifyContent:"center"}}>Lähetä tarjouspyyntö</button>
@@ -374,8 +371,8 @@ export default function KelvixHosting() {
             </div>
           ))}
           <div style={{marginTop:8,padding:"20px 22px",background:`rgba(27,58,75,0.03)`,borderRadius:14,border:`1px solid ${C.soft}`}}>
-            <div style={{fontSize:13,fontWeight:700,marginBottom:6,color:C.primary}}>Ilmainen tuottoarvio 24h sisällä</div>
-            <p style={{fontSize:13,color:"#777",margin:0,lineHeight:1.6}}>Jokainen yhteydenotto saa henkilökohtaisen vastauksen tuottoarviolla. Ei sido sinua mihinkään – ei riskiä, ei velvoitteita.</p>
+            <div style={{fontSize:13,fontWeight:700,marginBottom:6,color:C.primary}}>Ilmainen tarjous 24h sisällä</div>
+            <p style={{fontSize:13,color:"#777",margin:0,lineHeight:1.6}}>Jokainen yhteydenotto saa henkilökohtaisen vastauksen. Ei sido sinua mihinkään – ei riskiä, ei velvoitteita.</p>
           </div>
         </div>
       </div>
@@ -388,14 +385,66 @@ export default function KelvixHosting() {
     <section style={{...W,paddingTop:80,paddingBottom:80}} aria-label="Tietosuojaseloste">
       <Chip>Tietosuoja</Chip>
       <H2>Tietosuojaseloste</H2>
-      <div style={{maxWidth:720}}>
-        <p style={{fontSize:14.5,lineHeight:1.75,color:"#555",marginBottom:16}}><strong>Rekisterinpitäjä:</strong> Kelvix Oy, Oulu, Suomi. Sähköposti: ville@kelvixhosting.com</p>
-        <p style={{fontSize:14.5,lineHeight:1.75,color:"#555",marginBottom:16}}>Keräämme seuraavia henkilötietoja: nimi, sähköpostiosoite, puhelinnumero yhteydenottolomakkeen kautta. Tietoja käytetään ainoastaan yhteydenottopyyntöihin vastaamiseen.</p>
-        <p style={{fontSize:14.5,lineHeight:1.75,color:"#555",marginBottom:16}}>Käytämme Google Analytics -palvelua sivuston kävijätilastointiin. Google Analytics kerää anonymisoitua tietoa evästeiden avulla. Voit estää seurannan selaimesi asetuksista.</p>
-        <p style={{fontSize:14.5,lineHeight:1.75,color:"#555",marginBottom:16}}>Emme myy tai luovuta henkilötietoja kolmansille osapuolille. Tietoja säilytetään niin kauan kuin on tarpeen yhteydenoton käsittelyä varten.</p>
-        <p style={{fontSize:14.5,lineHeight:1.75,color:"#555",marginBottom:16}}>Sinulla on GDPR:n mukaisesti oikeus tarkastaa, korjata tai poistaa tietosi ottamalla yhteyttä: ville@kelvixhosting.com</p>
-        <p style={{fontSize:14.5,lineHeight:1.75,color:"#555",marginBottom:0}}>Tietosuojaseloste on laadittu EU:n yleisen tietosuoja-asetuksen (GDPR, 2016/679) mukaisesti.</p>
-      </div>
+      <p style={{fontSize:13,color:C.muted,marginBottom:40}}>Päivitetty: 11.5.2026 &middot; EU:n yleinen tietosuoja-asetus (GDPR) 2016/679</p>
+
+      {[
+        {t:"1. Rekisterinpitäjä",body:[
+          <><strong>Kelvix Oy</strong><br/>Oulu, Suomi<br/>Sähköposti: ville@kelvixhosting.com<br/>Puhelin: 040 965 6825</>
+        ]},
+        {t:"2. Rekisterin nimi",body:["Kelvix Hosting asiakasrekisteri ja yhteydenottolomakkeen tietorekisteri."]},
+        {t:"3. Henkilötietojen käsittelyn tarkoitus ja oikeusperuste",body:[
+          "Käsittelemme henkilötietoja seuraaviin tarkoituksiin:",
+          <ul style={{margin:"8px 0 0 0",padding:"0 0 0 20px",fontSize:14,lineHeight:1.75,color:"#555"}}>
+            <li>Yhteydenottopyyntöjen ja asiakaskyselyjen käsittely</li>
+            <li>Palvelusopimuksen solmiminen, hallinta ja täyttäminen</li>
+            <li>Tarjousten toimittaminen</li>
+            <li>Laskutus ja maksujen käsittely</li>
+            <li>Asiakassuhteen ylläpito ja asiakasviestintä</li>
+            <li>Lakisääteisten velvoitteiden täyttäminen</li>
+          </ul>,
+          "Käsittelyn oikeusperusteena on sopimuksen täytäntöönpano, rekisteröidyn suostumus sekä rekisterinpitäjän oikeutettu etu (asiakassuhteen hoitaminen)."
+        ]},
+        {t:"4. Rekisterin tietosisältö",body:[
+          "Rekisteri voi sisältää seuraavia henkilötietoja:",
+          <ul style={{margin:"8px 0 0 0",padding:"0 0 0 20px",fontSize:14,lineHeight:1.75,color:"#555"}}>
+            <li>Nimi, sähköpostiosoite, puhelinnumero</li>
+            <li>Kohteen osoite ja kiinteistön tiedot</li>
+            <li>Valittu palvelu tai palvelupyyntö</li>
+            <li>Viestintä- ja asiakashistoria</li>
+            <li>Sopimus- ja laskutustiedot</li>
+          </ul>
+        ]},
+        {t:"5. Säännönmukaiset tietolähteet",body:["Henkilötiedot kerätään rekisteröidyltä itseltään verkkosivun yhteydenottolomakkeen, sähköpostin tai puhelimen välityksellä."]},
+        {t:"6. Tietojen säännönmukainen luovuttaminen",body:["Henkilötietoja ei luovuteta ulkopuolisille ilman rekisteröidyn suostumusta, ellei lainsäädäntö sitä edellytä. Tietoja voidaan luovuttaa viranomaisille lain niin vaatiessa."]},
+        {t:"7. Tietojen siirto EU:n tai ETA:n ulkopuolelle",body:["Henkilötietoja ei siirretä EU:n tai ETA-alueen ulkopuolelle."]},
+        {t:"8. Tietojen säilytysaika",body:["Henkilötietoja säilytetään niin kauan kuin asiakassuhde on voimassa ja sen jälkeen kirjanpitolain edellyttämän ajan (6 vuotta). Yhteydenottolomakkeen tiedot, joista ei muodostu asiakassuhdetta, poistetaan 12 kuukauden kuluessa."]},
+        {t:"9. Rekisteröidyn oikeudet",body:[
+          "Rekisteröidyllä on seuraavat oikeudet:",
+          <ul style={{margin:"8px 0 0 0",padding:"0 0 0 20px",fontSize:14,lineHeight:1.75,color:"#555"}}>
+            <li><strong>Tarkastusoikeus:</strong> oikeus tarkastaa itseään koskevat tiedot</li>
+            <li><strong>Oikeus tietojen oikaisemiseen:</strong> oikeus vaatia virheellisten tietojen korjaamista</li>
+            <li><strong>Oikeus tietojen poistamiseen:</strong> oikeus pyytää tietojen poistamista ("oikeus tulla unohdetuksi")</li>
+            <li><strong>Oikeus käsittelyn rajoittamiseen:</strong> oikeus vaatia käsittelyn rajoittamista tietyissä tilanteissa</li>
+            <li><strong>Oikeus siirtää tiedot järjestelmästä toiseen</strong></li>
+            <li><strong>Oikeus peruuttaa suostumus</strong> milloin tahansa</li>
+            <li><strong>Oikeus tehdä valitus valvontaviranomaiselle</strong> (Tietosuojavaltuutettu, tietosuoja.fi)</li>
+          </ul>,
+          "Oikeuksien käyttämistä koskevat pyynnöt lähetetään sähköpostitse osoitteeseen ville@kelvixhosting.com."
+        ]},
+        {t:"10. Tietoturva",body:["Rekisterin tiedot on suojattu asianmukaisin teknisin ja organisatorisin toimenpitein. Tietoja käsittelevät vain ne henkilöt, joiden työtehtävät sitä edellyttävät. Käytämme SSL-salattua yhteyttä tiedonsiirron suojaamiseen."]},
+        {t:"11. Evästeet",body:["Verkkosivumme saattaa käyttää teknisiä evästeitä sivuston toiminnan varmistamiseen. Emme käytä markkinointi- tai seurantaevästeitä ilman suostumustasi."]},
+        {t:"12. Tietosuojaselosteen muutokset",body:["Pidätämme oikeuden päivittää tätä tietosuojaselostetta. Muutoksista ilmoitetaan verkkosivullamme. Merkittävistä muutoksista ilmoitetaan rekisteröidyille erikseen."]},
+        {t:"13. Yhteystiedot",body:[<>Tietosuoja-asioissa ota yhteyttä: <strong>ville@kelvixhosting.com</strong></>]},
+      ].map((sec,i)=>(
+        <div key={i} style={{marginBottom:32,paddingBottom:32,borderBottom:i<12?`1px solid ${C.soft}`:"none"}}>
+          <h3 style={{fontSize:17,fontWeight:700,color:C.primary,marginBottom:12}}>{sec.t}</h3>
+          {sec.body.map((b,j)=>(
+            typeof b === "string"
+              ? <p key={j} style={{fontSize:14.5,lineHeight:1.75,color:"#555",margin:"0 0 8px 0"}}>{b}</p>
+              : <div key={j}>{b}</div>
+          ))}
+        </div>
+      ))}
     </section>
   );
 
