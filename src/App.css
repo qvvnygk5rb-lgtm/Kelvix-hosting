@@ -25,7 +25,7 @@ body {
 .kx-nav-link:hover { color: #E06B00 !important; }
 .kx-nav-link.active { color: #E06B00 !important; }
 /* transparent state */
-.kx-nav:not(.scrolled) .kx-nav-link { color: rgba(255,255,255,0.75) !important; }
+.kx-nav:not(.scrolled) .kx-nav-link { color: rgba(255,255,255,0.92) !important; }
 .kx-nav:not(.scrolled) .kx-nav-link.active,
 .kx-nav:not(.scrolled) .kx-nav-link:hover { color: #F08820 !important; }
 .kx-nav:not(.scrolled) .kx-logo { color: #fff !important; }
@@ -33,7 +33,7 @@ body {
 .kx-nav:not(.scrolled) .kx-nav-cta { background: rgba(255,255,255,0.12) !important; border-color: rgba(255,255,255,0.2) !important; color: #fff !important; }
 .kx-nav.scrolled .kx-logo { color: #0C2340 !important; }
 .kx-nav.scrolled .kx-logo-accent { color: #E06B00 !important; }
-.kx-nav.scrolled .kx-nav-link { color: #5A7088 !important; }
+.kx-nav.scrolled .kx-nav-link { color: #1A3A52 !important; }
 .kx-nav.scrolled .kx-nav-cta { background: #0C2340 !important; border-color: transparent !important; color: #fff !important; }
 
 /* ── Hero slideshow ── */

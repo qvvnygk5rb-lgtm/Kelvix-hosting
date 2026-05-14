@@ -101,8 +101,7 @@ export default function KelvixHosting() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [faqOpen, setFaqOpen] = useState(null);
-  const [spotX, setSpotX] = useState("60%");
-  const [spotY, setSpotY] = useState("35%");
+  const spotRef = useRef(null);
   const { scrollY } = useScroll();
 
   useEffect(() => scrollY.on("change", v => setScrolled(v > 50)), [scrollY]);
@@ -163,7 +162,7 @@ export default function KelvixHosting() {
       {/* ── HERO ── */}
       <section
         style={{ position: "relative", overflow: "hidden", minHeight: "94vh", display: "flex", flexDirection: "column", background: "linear-gradient(180deg,#030710 0%,#0C2340 55%,#14305A 100%)" }}
-        onMouseMove={(e) => { const r = e.currentTarget.getBoundingClientRect(); setSpotX(((e.clientX-r.left)/r.width*100).toFixed(1)+"%"); setSpotY(((e.clientY-r.top)/r.height*100).toFixed(1)+"%"); }}
+        onMouseMove={(e) => { if (!spotRef.current) return; const r = e.currentTarget.getBoundingClientRect(); const x = ((e.clientX-r.left)/r.width*100).toFixed(1)+"%"; const y = ((e.clientY-r.top)/r.height*100).toFixed(1)+"%"; spotRef.current.style.background = `radial-gradient(560px circle at ${x} ${y}, rgba(206,136,64,0.18) 0%, transparent 55%)`; }}
       >
         <div className="kx-orb kx-orb-1" />
         <div className="kx-orb kx-orb-2" />
@@ -178,7 +177,7 @@ export default function KelvixHosting() {
 
         {/* Overlays — NOTE: spotlight z-index 1 is BELOW text (z-index 3), so text never disappears */}
         <div style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg,rgba(5,15,28,0.58) 0%,rgba(5,15,28,0.32) 45%,rgba(5,15,28,0.72) 100%)", zIndex: 1, pointerEvents: "none" }} />
-        <div style={{ position: "absolute", inset: 0, background: `radial-gradient(560px circle at ${spotX} ${spotY}, rgba(206,136,64,0.18) 0%, transparent 55%)`, zIndex: 1, pointerEvents: "none" }} />
+        <div ref={spotRef} style={{ position: "absolute", inset: 0, background: "radial-gradient(560px circle at 60% 35%, rgba(206,136,64,0.18) 0%, transparent 55%)", zIndex: 1, pointerEvents: "none" }} />
         <div style={{ position: "absolute", inset: 0, backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")", opacity: 1, mixBlendMode: "overlay", zIndex: 2, pointerEvents: "none" }} />
 
         {/* Hero content — z-index 3 ensures it's always above overlays */}
