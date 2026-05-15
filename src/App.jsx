@@ -224,7 +224,7 @@ export default function KelvixHosting() {
         <div style={{ ...W, position: "relative", zIndex: 3, width: "100%", paddingBottom: "clamp(28px,4vw,56px)" }}>
           <div style={{ animation: "kxHeroIn 0.7s cubic-bezier(0.16,1,0.3,1) 1s both", borderTop: "1px solid rgba(255,255,255,0.13)", borderBottom: "1px solid rgba(255,255,255,0.13)", padding: "30px 0", display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(120px,1fr))", gap: 20 }}>
             {[
-              { pre: "", val: 25, suf: " %", l: "Komissio – vain tuloksista" },
+              { pre: "", val: 25, suf: " %", l: "Provisio – vain tuloksista" },
               { pre: "+", val: 80, suf: " %", l: "Enemmän kuin pitkävuokra" },
               { pre: "", val: 0, suf: "", extra: "24/7", l: "Vieraspalvelu 3 kielellä" },
               { pre: "", val: 0, suf: " €", l: "Kiinteitä kuluja sinulle" },
@@ -278,7 +278,7 @@ export default function KelvixHosting() {
               </p>
               <Stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(140px,1fr))", gap: 32, marginBottom: 44 }}>
                 {[
-                  { pre: "", val: 25, suf: " %", l: "Komissiota – vain tuloksista" },
+                  { pre: "", val: 25, suf: " %", l: "Provisiota – vain tuloksista" },
                   { pre: "+", val: 80, suf: " %", l: "Enemmän kuin pitkävuokra" },
                   { pre: "", val: 0, suf: " h", l: "Sinun aikaasi" },
                 ].map((s, i) => (
@@ -321,7 +321,7 @@ export default function KelvixHosting() {
             { icon: <MapPin s={22} />, t: "Paikallinen ja nopea", txt: "Reagoimme ongelmatilanteisiin tuntien – emme päivien – sisällä. Tunnemme Oulun alueet, palvelut ja tapahtumakalenterin läpikotaisin." },
             { icon: <TrendUp s={22} />, t: "AI-pohjainen hinnoittelu", txt: "Algoritmimme seuraa kysyntää, kilpailijoiden hintoja ja tulevia tapahtumia reaaliajassa. Yöhintasi on aina optimaalinen." },
             { icon: <Star s={22} />, t: "Oulu2026-valmius", txt: "Kulttuuripääkaupunkivuosi tuo ennätysmäärän kansainvälisiä matkailijoita. Maksimoimme tuottosi koko vuoden." },
-            { icon: <Shield s={22} />, t: "Nolla riskiä sinulle", txt: "Komissiomalli: ei kiinteitä kuluja. Jos emme tuota tulosta, emme veloita senttiäkään. Riski on meillä." },
+            { icon: <Shield s={22} />, t: "Nolla riskiä sinulle", txt: "Provisiopalkkiomalli: ei kiinteitä kuluja. Jos emme tuota tulosta, emme veloita senttiäkään. Riski on meillä." },
             { icon: <MsgSquare s={22} />, t: "24/7 vierasviestintä", txt: "Vastaamme jokaiseen viestiä, kysymykseen ja hätätilanteeseen – suomeksi, englanniksi ja saksaksi." },
             { icon: <TrendUp s={22} />, t: "Läpinäkyvä raportointi", txt: "Kuukausittainen selkeä raportti: tulot, käyttöaste, arvostelut ja vertailu edellisiin kuukausiin." },
           ].map((c, i) => (
@@ -347,7 +347,7 @@ export default function KelvixHosting() {
           {[
             { n: "01", t: "Pyydä tarjous (1 min)", txt: "Täytä lomake tai soita. Saat räätälöidyn tuottoarvion kohteestasi 24 tunnin sisällä – ilmaiseksi ja sitoumuksetta." },
             { n: "02", t: "Tutustumme kohteeseesi (24h)", txt: "Käymme kohteessa, arvioimme sen potentiaalin ja käymme kaikki yksityiskohdat läpi henkilökohtaisesti." },
-            { n: "03", t: "Allekirjoitamme sopimuksen", txt: "Selkeä yhteistyösopimus ilman piilokuluja. Komissio vain toteutuneista tuloista – ei kiinteitä maksuja." },
+            { n: "03", t: "Allekirjoitamme sopimuksen", txt: "Selkeä yhteistyösopimus ilman piilokuluja. Provisio vain toteutuneista tuloista – ei kiinteitä maksuja." },
             { n: "04", t: "Ensimmäinen varaus muutamassa päivässä", txt: "Kuvaamme, luomme ilmoitukset ja käynnistämme. Tyypillisesti ensimmäiset varaukset 5–10 päivässä aloituksesta." },
           ].map((s, i) => (
             <StaggerItem key={i}>
@@ -383,13 +383,13 @@ export default function KelvixHosting() {
         <R style={{ textAlign: "center", marginBottom: 52 }}>
           <Chip>Hinnoittelu</Chip>
           <H2>Läpinäkyvä hinnoittelu.<br /><em style={{ color: "#E06B00", fontStyle: "italic" }}>Ei yllätyksiä</em>.</H2>
-          <p style={{ fontSize: 16, color: "#5A7088", lineHeight: 1.75 }}>Komissiomalli: tienaamme vain silloin kun sinä tienaat.</p>
+          <p style={{ fontSize: 16, color: "#5A7088", lineHeight: 1.75 }}>Provisiopalkkiomalli: tienaamme vain silloin kun sinä tienaat.</p>
         </R>
         <Stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,300px),1fr))", gap: 20, marginBottom: 40 }}>
           {[
             { featured: false, top: "Helppo aloitus", t: "Avainpalvelu", pr: "29 €", un: "/ vaihto  tai  249 €/kk", items: ["Avainten luovutus & vastaanotto","Ammattimainen vieraan vastaanotto","Asunnon kunnon tarkistus","Valokuvaraportti joka vaihdon jälkeen"] },
-            { featured: true,  top: "Suosituin", t: "Täysi hallinta", pr: "25 %", un: "komissiota – kaikki mukana", items: ["Ilmoitukset + AI-hinnoittelu","Vierasviestintä 24/7 (FI/EN/DE)","Ammattimainen siivous + liinavaatteet","Huoltokoordinointi & arvostelut","Kuukausittainen tuottoraportti"] },
-            { featured: false, top: "Itse tekeville", t: "Kevyt hallinta", pr: "15 %", un: "komissiota – digitaalinen puoli", items: ["Ilmoitusten hallinta & optimointi","Dynaaminen hinnoittelu","Vierasviestintä 24/7","Arvostelujen hallinta","Omistaja hoitaa siivouksen & avaimet"] },
+            { featured: true,  top: "Suosituin", t: "Täysi hallinta", pr: "25 %", un: "provisiota – kaikki mukana", items: ["Ilmoitukset + AI-hinnoittelu","Vierasviestintä 24/7 (FI/EN/DE)","Ammattimainen siivous + liinavaatteet","Huoltokoordinointi & arvostelut","Kuukausittainen tuottoraportti"] },
+            { featured: false, top: "Itse tekeville", t: "Kevyt hallinta", pr: "15 %", un: "provisiota – digitaalinen puoli", items: ["Ilmoitusten hallinta & optimointi","Dynaaminen hinnoittelu","Vierasviestintä 24/7","Arvostelujen hallinta","Omistaja hoitaa siivouksen & avaimet"] },
           ].map((p, i) => (
             <StaggerItem key={i}>
               <motion.div className={`kx-card-hover${p.featured ? " kx-card-featured" : ""}`}
@@ -431,7 +431,7 @@ export default function KelvixHosting() {
               { q: "Mitä jos taloyhtiö kieltää lyhytvuokrauksen?", a: "Tarkista ensin taloyhtiön yhtiöjärjestys ja hallituksen kannan. Avustamme tarvittaessa neuvotteluissa ja vastaamme tavallisimpiin huoliin (turvallisuus, häiriöt). Monet kielot ovat tulkinnanvaraisia." },
               { q: "Miten avainten luovutus toimii ilman älylukkoja?", a: "Hoituu – käymme itse luovuttamassa avaimet tai käytämme turvallista avainlaatikkoa. Avainpalvelu on yksi erikoisuuksistamme: se on sujuvaa, ammattimaista ja henkilökohtaista." },
               { q: "Mitä jos kohteessani sattuu vahinko?", a: "Airbnb AirCover kattaa jopa 3 M€ asti omaisuusvahingot. Booking.com:lla on oma vakuutusjärjestelmänsä. Me dokumentoimme jokaisen vaihdon, reklamoimme ja hoidamme korvauksen puolestasi." },
-              { q: "Kuinka paljon kohteeni tuottaa Oulussa?", a: "Oulun yksiö tuottaa lyhytvuokrauksessa tyypillisesti 1 200–2 000 €/kk ennen komissiotamme, kun käyttöaste on 60–75 %. Oulu2026-vuonna kasvupotentiaali on erityisen suuri. Saat ilmaisen arvion meiltä." },
+              { q: "Kuinka paljon kohteeni tuottaa Oulussa?", a: "Oulun yksiö tuottaa lyhytvuokrauksessa tyypillisesti 1 200–2 000 €/kk ennen provisiotamme, kun käyttöaste on 60–75 %. Oulu2026-vuonna kasvupotentiaali on erityisen suuri. Saat ilmaisen arvion meiltä." },
               { q: "Onko sopimuksessa pitkä sitoutumisaika?", a: "Ei. Yhteistyö perustuu kuukausi kerrallaan -malliin – ei pitkiä sitoutumisia. Voit lopettaa yhteistyön 30 päivän irtisanomisajalla milloin tahansa." },
               { q: "Hoidatteko myös verot ja kirjanpidon?", a: "Emme ole kirjanpitäjiä, mutta annamme selkeät kuukausiraportit kaikista tuloista, jotka tilitoit verottajalle. Suosittelemme käyttämään omaa tilitoimistoa veroilmoitukseen." },
               { q: "Mitä tapahtuu, jos en ole tyytyväinen?", a: "Puhumme asiasta ensin. Jos yhteistyö ei toimi, voit irtisanoa sopimuksen 30 päivän ilmoitusajalla. Ei sakkomaksuja, ei lukituksia. Asiakkaamme pysyvät koska haluavat – ei koska pakko." },
@@ -504,8 +504,8 @@ export default function KelvixHosting() {
       <Stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,320px),1fr))", gap: 22, marginBottom: 60 }}>
         {[
           { top: "Helppo aloitus", icon: <KeyIcon s={28} />, t: "Avainpalvelu", pr: "alk. 29 €/vaihto", desc: "Se alkuperäinen kipupiste ratkaistuna. Ei enää avainten juoksupoikana toimimista.", items: ["Avainten luovutus vieraalle sovittuna aikana","Henkilökohtainen vastaanotto ja opastus asuntoon","Avainten vastaanotto check-outissa ja kunnon tarkistus","Valokuvaraportti joka vaihdon jälkeen","Kuukausipaketti: 249 €/kk (10 vaihtoa), lisävaihdot 22 €/kpl"], feat: false },
-          { top: "Suosituin", icon: <Home s={28} />, t: "Täysi hallinta", pr: "25 % komissiolla", desc: "Me hoidamme kaiken alusta loppuun. Sinun ainoa tehtäväsi on seurata raporttia.", items: ["Ilmoitusten luonti, optimointi ja näkyvyyden maksimointi","Ammattimainen valokuvaus","AI-pohjainen dynaaminen hinnoittelu","Vierasviestintä 24/7 (FI/EN/DE)","Ammattimainen siivous jokaisen vieraan jälkeen","Puhtaat liinavaatteet ja perustarvikkeet","Huoltokoordinointi","Arvostelujen hallinta","Oulu2026-tapahtumahinnoittelu","Kuukausittainen tuottoraportti"], feat: true },
-          { top: "Itse tekeville", icon: <Star s={28} />, t: "Kevyt hallinta", pr: "15 % komissiolla", desc: "Sinä hoidat fyysisen puolen. Me hoidamme kaiken digitaalisen.", items: ["Ilmoitusten luonti, hallinta ja optimointi","Dynaaminen hinnoittelu","Vierasviestintä 24/7","Arvostelujen hallinta","Kuukausittainen tuottoraportti","Omistaja hoitaa itse siivouksen ja avaimet"], feat: false },
+          { top: "Suosituin", icon: <Home s={28} />, t: "Täysi hallinta", pr: "25 % provisiolla", desc: "Me hoidamme kaiken alusta loppuun. Sinun ainoa tehtäväsi on seurata raporttia.", items: ["Ilmoitusten luonti, optimointi ja näkyvyyden maksimointi","Ammattimainen valokuvaus","AI-pohjainen dynaaminen hinnoittelu","Vierasviestintä 24/7 (FI/EN/DE)","Ammattimainen siivous jokaisen vieraan jälkeen","Puhtaat liinavaatteet ja perustarvikkeet","Huoltokoordinointi","Arvostelujen hallinta","Oulu2026-tapahtumahinnoittelu","Kuukausittainen tuottoraportti"], feat: true },
+          { top: "Itse tekeville", icon: <Star s={28} />, t: "Kevyt hallinta", pr: "15 % provisiolla", desc: "Sinä hoidat fyysisen puolen. Me hoidamme kaiken digitaalisen.", items: ["Ilmoitusten luonti, hallinta ja optimointi","Dynaaminen hinnoittelu","Vierasviestintä 24/7","Arvostelujen hallinta","Kuukausittainen tuottoraportti","Omistaja hoitaa itse siivouksen ja avaimet"], feat: false },
         ].map((p, i) => (
           <StaggerItem key={i}>
             <motion.div className={`kx-card-hover${p.feat ? " kx-card-featured" : ""}`}
@@ -548,14 +548,14 @@ export default function KelvixHosting() {
       <R style={{ textAlign: "center", marginBottom: 56 }}>
         <Chip>Hinnoittelu</Chip>
         <H2>Läpinäkyvä hinnoittelu.<br /><em style={{ color: "#E06B00", fontStyle: "italic" }}>Ei yllätyksiä</em>.</H2>
-        <p style={{ fontSize: 16, color: "#5A7088", lineHeight: 1.75, maxWidth: 540, margin: "0 auto" }}>Komissiomalli: tienaamme vain silloin kun sinä tienaat. Riski on meillä – tuotot sinulla.</p>
+        <p style={{ fontSize: 16, color: "#5A7088", lineHeight: 1.75, maxWidth: 540, margin: "0 auto" }}>Provisiopalkkiomalli: tienaamme vain silloin kun sinä tienaat. Riski on meillä – tuotot sinulla.</p>
       </R>
       <Stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,250px),1fr))", gap: 18, marginBottom: 56 }}>
         {[
           { feat: false, lab: "Avainpalvelu", nm: "Perusvaihto", pr: "29 €", un: "per vaihto", ft: ["Avainten luovutus ja vastaanotto","Ammattimainen vieraan opastus","Asunnon kunnon tarkistus","Valokuvaraportti omistajalle"] },
           { feat: false, lab: "Avainpalvelu", nm: "Kuukausipaketti", pr: "249 €", un: "per kk · sis. 10 vaihtoa", ft: ["Kaikki perusvaihdon palvelut","10 vaihtoa kuukaudessa","Lisävaihdot vain 22 €/kpl","Ensisijainen palvelu"] },
-          { feat: true,  lab: "Hosting", nm: "Täysi hallinta", pr: "25 %", un: "komissiota bruttovuokratulosta", ft: ["Koko prosessi A:sta Ö:hön","Ilmoitukset, hinnoittelu, viestintä 24/7","Ammattimainen siivous & liinavaatteet","Huoltokoordinointi","Arvostelujen hallinta","AI-tapahtumahinnoittelu"] },
-          { feat: false, lab: "Hosting", nm: "Kevyt hallinta", pr: "15 %", un: "komissiota bruttovuokratulosta", ft: ["Ilmoitusten hallinta & optimointi","Dynaaminen hinnoittelu","Vierasviestintä 24/7","Arvostelujen hallinta","Omistaja hoitaa fyysisen puolen"] },
+          { feat: true,  lab: "Hosting", nm: "Täysi hallinta", pr: "25 %", un: "provisiota bruttovuokratulosta", ft: ["Koko prosessi A:sta Ö:hön","Ilmoitukset, hinnoittelu, viestintä 24/7","Ammattimainen siivous & liinavaatteet","Huoltokoordinointi","Arvostelujen hallinta","AI-tapahtumahinnoittelu"] },
+          { feat: false, lab: "Hosting", nm: "Kevyt hallinta", pr: "15 %", un: "provisiota bruttovuokratulosta", ft: ["Ilmoitusten hallinta & optimointi","Dynaaminen hinnoittelu","Vierasviestintä 24/7","Arvostelujen hallinta","Omistaja hoitaa fyysisen puolen"] },
         ].map((p, i) => (
           <StaggerItem key={i}>
             <motion.div className={`kx-card-hover${p.feat ? " kx-card-featured" : ""}`}
