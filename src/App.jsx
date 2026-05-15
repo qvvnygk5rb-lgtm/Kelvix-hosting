@@ -387,7 +387,7 @@ export default function KelvixHosting() {
         </R>
         <Stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,300px),1fr))", gap: 20, marginBottom: 40 }}>
           {[
-            { featured: false, top: "Helppo aloitus", t: "Avainpalvelu", pr: "29 €", un: "/ vaihto  tai  249 €/kk", items: ["Avainten luovutus & vastaanotto","Ammattimainen vieraan vastaanotto","Asunnon kunnon tarkistus","Valokuvaraportti joka vaihdon jälkeen"] },
+            { featured: false, top: "Helppo aloitus", t: "Avainpalvelu", pr: "alk. 15 €", un: "/ vaihto  tai  229 €/kk", items: ["Avainten luovutus & vastaanotto","Ammattimainen vieraan vastaanotto","Asunnon kunnon tarkistus","Valokuvaraportti joka vaihdon jälkeen"] },
             { featured: true,  top: "Suosituin", t: "Täysi hallinta", pr: "25 %", un: "provisiota – kaikki mukana", items: ["Ilmoitukset + AI-hinnoittelu","Vierasviestintä 24/7 (FI/EN/DE)","Ammattimainen siivous + liinavaatteet","Huoltokoordinointi & arvostelut","Kuukausittainen tuottoraportti"] },
             { featured: false, top: "Itse tekeville", t: "Kevyt hallinta", pr: "15 %", un: "provisiota – digitaalinen puoli", items: ["Ilmoitusten hallinta & optimointi","Dynaaminen hinnoittelu","Vierasviestintä 24/7","Arvostelujen hallinta","Omistaja hoitaa siivouksen & avaimet"] },
           ].map((p, i) => (
@@ -503,7 +503,7 @@ export default function KelvixHosting() {
       </R>
       <Stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,320px),1fr))", gap: 22, marginBottom: 60 }}>
         {[
-          { top: "Helppo aloitus", icon: <KeyIcon s={28} />, t: "Avainpalvelu", pr: "alk. 29 €/vaihto", desc: "Se alkuperäinen kipupiste ratkaistuna. Ei enää avainten juoksupoikana toimimista.", items: ["Avainten luovutus vieraalle sovittuna aikana","Henkilökohtainen vastaanotto ja opastus asuntoon","Avainten vastaanotto check-outissa ja kunnon tarkistus","Valokuvaraportti joka vaihdon jälkeen","Kuukausipaketti: 249 €/kk (10 vaihtoa), lisävaihdot 22 €/kpl"], feat: false },
+          { top: "Helppo aloitus", icon: <KeyIcon s={28} />, t: "Avainpalvelu", pr: "alk. 15 €/vaihto", desc: "Se alkuperäinen kipupiste ratkaistuna. Ei enää avainten juoksupoikana toimimista.", items: ["Avainten luovutus vieraalle sovittuna aikana","Henkilökohtainen vastaanotto ja opastus asuntoon","Avainten vastaanotto check-outissa ja kunnon tarkistus","Valokuvaraportti joka vaihdon jälkeen","Kuukausipaketti: 229 €/kk (10 vaihtoa), lisävaihdot 22 €/kpl"], feat: false },
           { top: "Suosituin", icon: <Home s={28} />, t: "Täysi hallinta", pr: "25 % provisiolla", desc: "Me hoidamme kaiken alusta loppuun. Sinun ainoa tehtäväsi on seurata raporttia.", items: ["Ilmoitusten luonti, optimointi ja näkyvyyden maksimointi","Ammattimainen valokuvaus","AI-pohjainen dynaaminen hinnoittelu","Vierasviestintä 24/7 (FI/EN/DE)","Ammattimainen siivous jokaisen vieraan jälkeen","Puhtaat liinavaatteet ja perustarvikkeet","Huoltokoordinointi","Arvostelujen hallinta","Oulu2026-tapahtumahinnoittelu","Kuukausittainen tuottoraportti"], feat: true },
           { top: "Itse tekeville", icon: <Star s={28} />, t: "Kevyt hallinta", pr: "15 % provisiolla", desc: "Sinä hoidat fyysisen puolen. Me hoidamme kaiken digitaalisen.", items: ["Ilmoitusten luonti, hallinta ja optimointi","Dynaaminen hinnoittelu","Vierasviestintä 24/7","Arvostelujen hallinta","Kuukausittainen tuottoraportti","Omistaja hoitaa itse siivouksen ja avaimet"], feat: false },
         ].map((p, i) => (
@@ -552,8 +552,8 @@ export default function KelvixHosting() {
       </R>
       <Stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,250px),1fr))", gap: 18, marginBottom: 56 }}>
         {[
-          { feat: false, lab: "Avainpalvelu", nm: "Perusvaihto", pr: "29 €", un: "per vaihto", ft: ["Avainten luovutus ja vastaanotto","Ammattimainen vieraan opastus","Asunnon kunnon tarkistus","Valokuvaraportti omistajalle"] },
-          { feat: false, lab: "Avainpalvelu", nm: "Kuukausipaketti", pr: "249 €", un: "per kk · sis. 10 vaihtoa", ft: ["Kaikki perusvaihdon palvelut","10 vaihtoa kuukaudessa","Lisävaihdot vain 22 €/kpl","Ensisijainen palvelu"] },
+          { feat: false, lab: "Avainpalvelu", nm: "Perusvaihto", pr: "15 €", un: "/ vaihto · tutustumishinta", ft: ["Avainten luovutus ja vastaanotto","Ammattimainen vieraan opastus","Asunnon kunnon tarkistus","Valokuvaraportti omistajalle","Normaalihinta 25 €/vaihto uusille vaihtoille","Tutustumishinta on tarjolla rajoitetun ajan ensimmäisille asiakkaillemme."] },
+          { feat: false, lab: "Avainpalvelu", nm: "Kuukausipaketti", pr: "229 €", un: "per kk · sis. 10 vaihtoa", ft: ["Kaikki perusvaihdon palvelut","10 vaihtoa kuukaudessa","Lisävaihdot vain 22 €/kpl","Ensisijainen palvelu"] },
           { feat: true,  lab: "Hosting", nm: "Täysi hallinta", pr: "25 %", un: "provisiota bruttovuokratulosta", ft: ["Koko prosessi A:sta Ö:hön","Ilmoitukset, hinnoittelu, viestintä 24/7","Ammattimainen siivous & liinavaatteet","Huoltokoordinointi","Arvostelujen hallinta","AI-tapahtumahinnoittelu"] },
           { feat: false, lab: "Hosting", nm: "Kevyt hallinta", pr: "15 %", un: "provisiota bruttovuokratulosta", ft: ["Ilmoitusten hallinta & optimointi","Dynaaminen hinnoittelu","Vierasviestintä 24/7","Arvostelujen hallinta","Omistaja hoitaa fyysisen puolen"] },
         ].map((p, i) => (
