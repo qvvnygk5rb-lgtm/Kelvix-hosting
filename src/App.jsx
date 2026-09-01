@@ -95,69 +95,56 @@ const StaggerItem = ({ children, style: s }) => (
   </motion.div>
 );
 
-/* ── Main component ── */
-export default function KelvixHosting() {
-  const [page, setPage] = useState("etusivu");
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [faqOpen, setFaqOpen] = useState(null);
-  const spotRef = useRef(null);
-  const { scrollY } = useScroll();
+/* ── Shared static layout/UI (module scope so identity is stable across re-renders) ── */
+const W = { maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px,5vw,64px)" };
+const inp = { width: "100%", padding: "14px 18px", border: "1px solid rgba(12,35,64,0.14)", borderRadius: 12, fontSize: 15, background: "#fff", marginBottom: 14, display: "block", fontFamily: "'DM Sans',sans-serif" };
 
-  useEffect(() => scrollY.on("change", v => setScrolled(v > 50)), [scrollY]);
+const Chip = ({ children, dark }) => (
+  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 20, padding: "6px 14px", borderRadius: 999, background: dark ? "rgba(255,255,255,0.07)" : "rgba(224,107,0,0.1)", border: dark ? "1px solid rgba(255,255,255,0.12)" : "1px solid rgba(206,136,64,0.2)" }}>
+    <span style={{ color: "#E06B00" }}><Sparkle /></span>
+    <span style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "2.2px", color: "#E06B00" }}>{children}</span>
+  </div>
+);
 
-  const go = (p) => { setPage(p); setMenuOpen(false); setFaqOpen(null); window.scrollTo({ top: 0, behavior: "instant" }); };
+const H2 = ({ children, light, style: s }) => (
+  <h2 style={{ fontSize: "clamp(30px,4.8vw,56px)", fontWeight: 700, lineHeight: 1.06, letterSpacing: "-1.6px", margin: "0 0 20px", color: light ? "#fff" : "#0C2340", ...(s || {}) }}>
+    {children}
+  </h2>
+);
 
-  const W = { maxWidth: 1280, margin: "0 auto", padding: "0 clamp(20px,5vw,64px)" };
+const BtnOrange = ({ children, onClick, full, style: s }) => (
+  <motion.button className="kx-shine" whileHover={{ scale: 1.025, y: -2 }} whileTap={{ scale: 0.97 }} onClick={onClick}
+    style={{ display: "inline-flex", alignItems: "center", gap: 9, background: "#E06B00", color: "#fff", padding: "16px 32px", borderRadius: 999, fontSize: 14, fontWeight: 600, cursor: "pointer", border: "none", letterSpacing: "0.1px", width: full ? "100%" : undefined, justifyContent: full ? "center" : undefined, ...(s || {}) }}>
+    {children}
+  </motion.button>
+);
 
-  /* ── Shared UI ── */
-  const Chip = ({ children, dark }) => (
-    <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 20, padding: "6px 14px", borderRadius: 999, background: dark ? "rgba(255,255,255,0.07)" : "rgba(224,107,0,0.1)", border: dark ? "1px solid rgba(255,255,255,0.12)" : "1px solid rgba(206,136,64,0.2)" }}>
-      <span style={{ color: "#E06B00" }}><Sparkle /></span>
-      <span style={{ fontSize: 11, fontWeight: 600, textTransform: "uppercase", letterSpacing: "2.2px", color: "#E06B00" }}>{children}</span>
-    </div>
-  );
+const BtnDark = ({ children, onClick, style: s }) => (
+  <motion.button className="kx-shine" whileHover={{ scale: 1.025, y: -2 }} whileTap={{ scale: 0.97 }} onClick={onClick}
+    style={{ display: "inline-flex", alignItems: "center", gap: 9, background: "#0C2340", color: "#fff", padding: "16px 32px", borderRadius: 999, fontSize: 14, fontWeight: 600, cursor: "pointer", border: "none", letterSpacing: "0.1px", ...(s || {}) }}>
+    {children}
+  </motion.button>
+);
 
-  const H2 = ({ children, light, style: s }) => (
-    <h2 style={{ fontSize: "clamp(30px,4.8vw,56px)", fontWeight: 700, lineHeight: 1.06, letterSpacing: "-1.6px", margin: "0 0 20px", color: light ? "#fff" : "#0C2340", ...(s || {}) }}>
-      {children}
-    </h2>
-  );
+const BtnOutline = ({ children, onClick }) => (
+  <motion.button whileHover={{ background: "#0C2340", color: "#fff", y: -1, boxShadow: "0 10px 28px rgba(15,42,61,0.18)" }} onClick={onClick}
+    style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", color: "#0C2340", border: "1.5px solid rgba(15,42,61,0.28)", borderRadius: 999, padding: "15px 30px", fontSize: 14, fontWeight: 600, cursor: "pointer" }}>
+    {children}
+  </motion.button>
+);
 
-  const BtnOrange = ({ children, onClick, full, style: s }) => (
-    <motion.button className="kx-shine" whileHover={{ scale: 1.025, y: -2 }} whileTap={{ scale: 0.97 }} onClick={onClick}
-      style={{ display: "inline-flex", alignItems: "center", gap: 9, background: "#E06B00", color: "#fff", padding: "16px 32px", borderRadius: 999, fontSize: 14, fontWeight: 600, cursor: "pointer", border: "none", letterSpacing: "0.1px", width: full ? "100%" : undefined, justifyContent: full ? "center" : undefined, ...(s || {}) }}>
-      {children}
-    </motion.button>
-  );
+const Li = ({ children }) => (
+  <li style={{ display: "flex", alignItems: "flex-start", gap: 9, fontSize: 13.5, lineHeight: 1.65, color: "#555", marginBottom: 10 }}>
+    <span style={{ color: "#E06B00", flexShrink: 0, marginTop: 2 }}><Check /></span>
+    <span>{children}</span>
+  </li>
+);
 
-  const BtnDark = ({ children, onClick, style: s }) => (
-    <motion.button className="kx-shine" whileHover={{ scale: 1.025, y: -2 }} whileTap={{ scale: 0.97 }} onClick={onClick}
-      style={{ display: "inline-flex", alignItems: "center", gap: 9, background: "#0C2340", color: "#fff", padding: "16px 32px", borderRadius: 999, fontSize: 14, fontWeight: 600, cursor: "pointer", border: "none", letterSpacing: "0.1px", ...(s || {}) }}>
-      {children}
-    </motion.button>
-  );
-
-  const BtnOutline = ({ children, onClick }) => (
-    <motion.button whileHover={{ background: "#0C2340", color: "#fff", y: -1, boxShadow: "0 10px 28px rgba(15,42,61,0.18)" }} onClick={onClick}
-      style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "transparent", color: "#0C2340", border: "1.5px solid rgba(15,42,61,0.28)", borderRadius: 999, padding: "15px 30px", fontSize: 14, fontWeight: 600, cursor: "pointer" }}>
-      {children}
-    </motion.button>
-  );
-
-  const Li = ({ children }) => (
-    <li style={{ display: "flex", alignItems: "flex-start", gap: 9, fontSize: 13.5, lineHeight: 1.65, color: "#555", marginBottom: 10 }}>
-      <span style={{ color: "#E06B00", flexShrink: 0, marginTop: 2 }}><Check /></span>
-      <span>{children}</span>
-    </li>
-  );
-
-  const inp = { width: "100%", padding: "14px 18px", border: "1px solid rgba(12,35,64,0.14)", borderRadius: 12, fontSize: 15, background: "#fff", marginBottom: 14, display: "block", fontFamily: "'DM Sans',sans-serif" };
-
-  /* ══════════════════════════════════════
-     ETUSIVU
-  ══════════════════════════════════════ */
-  const Etusivu = () => (
+/* ══════════════════════════════════════
+   ETUSIVU
+══════════════════════════════════════ */
+function Etusivu({ go, spotRef, faqOpen, setFaqOpen }) {
+  return (
     <>
       {/* ── HERO ── */}
       <section
@@ -203,7 +190,7 @@ export default function KelvixHosting() {
             </div>
 
             <div style={{ animation: "kxHeroIn 0.8s cubic-bezier(0.16,1,0.3,1) 0.68s both", display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginTop: 8 }}>
-              <BtnOrange onClick={() => go("yhteystiedot")}>Pyydä tarjousta <Arrow /></BtnOrange>
+              <BtnOrange onClick={() => go("yhteystiedot")}>Ota yhteyttä <Arrow /></BtnOrange>
               <motion.button whileHover={{ background: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.38)" }} onClick={() => go("palvelut")}
                 style={{ background: "rgba(255,255,255,0.07)", backdropFilter: "blur(16px)", color: "#fff", border: "1.5px solid rgba(255,255,255,0.2)", borderRadius: 999, padding: "15px 30px", fontSize: 14, fontWeight: 600, cursor: "pointer" }}>
                 Katso palvelut
@@ -303,7 +290,7 @@ export default function KelvixHosting() {
             <p style={{ fontSize: "clamp(18px,2.5vw,28px)", fontWeight: 700, color: "#fff", letterSpacing: "-0.5px", textShadow: "0 2px 20px rgba(0,0,0,0.5)", marginBottom: 20 }}>
               Oululainen palvelu, oululainen osaaminen
             </p>
-            <BtnOrange onClick={() => go("yhteystiedot")} style={{ padding: "14px 28px", fontSize: 14 }}>Pyydä tarjousta <Arrow /></BtnOrange>
+            <BtnOrange onClick={() => go("yhteystiedot")} style={{ padding: "14px 28px", fontSize: 14 }}>Ota yhteyttä <Arrow /></BtnOrange>
           </div>
         </R>
       </ParallaxImg>
@@ -345,7 +332,7 @@ export default function KelvixHosting() {
         </R>
         <Stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,220px),1fr))", gap: 32 }}>
           {[
-            { n: "01", t: "Pyydä tarjous (1 min)", txt: "Täytä lomake tai soita. Saat räätälöidyn tuottoarvion kohteestasi 24 tunnin sisällä – ilmaiseksi ja sitoumuksetta." },
+            { n: "01", t: "Ota yhteyttä (1 min)", txt: "Täytä lomake tai soita. Palaamme asiaan 24 tunnin sisällä – ilmaiseksi ja sitoumuksetta." },
             { n: "02", t: "Tutustumme kohteeseesi (24h)", txt: "Käymme kohteessa, arvioimme sen potentiaalin ja käymme kaikki yksityiskohdat läpi henkilökohtaisesti." },
             { n: "03", t: "Allekirjoitamme sopimuksen", txt: "Selkeä yhteistyösopimus ilman piilokuluja. Provisio vain toteutuneista tuloista – ei kiinteitä maksuja." },
             { n: "04", t: "Ensimmäinen varaus muutamassa päivässä", txt: "Kuvaamme, luomme ilmoitukset ja käynnistämme. Tyypillisesti ensimmäiset varaukset 5–10 päivässä aloituksesta." },
@@ -388,8 +375,7 @@ export default function KelvixHosting() {
         <Stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,300px),1fr))", gap: 20, marginBottom: 40 }}>
           {[
             { featured: false, top: "Helppo aloitus", t: "Avainpalvelu", pr: "alk. 15 €", un: "/ vaihto  tai  229 €/kk", items: ["Avainten luovutus & vastaanotto","Ammattimainen vieraan vastaanotto","Asunnon kunnon tarkistus","Valokuvaraportti joka vaihdon jälkeen"] },
-            { featured: true,  top: "Suosituin", t: "Täysi hallinta", pr: "25 %", un: "provisiota – kaikki mukana", items: ["Ilmoitukset + AI-hinnoittelu","Vierasviestintä 24/7 (FI/EN/DE)","Ammattimainen siivous + liinavaatteet","Huoltokoordinointi & arvostelut","Kuukausittainen tuottoraportti"] },
-            { featured: false, top: "Itse tekeville", t: "Kevyt hallinta", pr: "15 %", un: "provisiota – digitaalinen puoli", items: ["Ilmoitusten hallinta & optimointi","Dynaaminen hinnoittelu","Vierasviestintä 24/7","Arvostelujen hallinta","Omistaja hoitaa siivouksen & avaimet"] },
+            { featured: true,  top: "Suosituin", t: "Täysi hallinta", pr: "alkaen 25 %", un: "provisiota – kaikki mukana", items: ["Ilmoitukset + AI-hinnoittelu","Vierasviestintä 24/7 (FI/EN/DE)","Ammattimainen siivous + liinavaatteet","Huoltokoordinointi & arvostelut","Kuukausittainen tuottoraportti"] },
           ].map((p, i) => (
             <StaggerItem key={i}>
               <motion.div className={`kx-card-hover${p.featured ? " kx-card-featured" : ""}`}
@@ -405,7 +391,7 @@ export default function KelvixHosting() {
                   </div>
                 ))}
                 <div style={{ marginTop: "auto", paddingTop: 24 }}>
-                  <BtnOrange onClick={() => go("yhteystiedot")} full>Pyydä tarjousta <Arrow /></BtnOrange>
+                  <BtnOrange onClick={() => go("yhteystiedot")} full>Ota yhteyttä <Arrow /></BtnOrange>
                 </div>
               </motion.div>
             </StaggerItem>
@@ -431,7 +417,7 @@ export default function KelvixHosting() {
               { q: "Mitä jos taloyhtiö kieltää lyhytvuokrauksen?", a: "Tarkista ensin taloyhtiön yhtiöjärjestys ja hallituksen kannan. Avustamme tarvittaessa neuvotteluissa ja vastaamme tavallisimpiin huoliin (turvallisuus, häiriöt). Monet kielot ovat tulkinnanvaraisia." },
               { q: "Miten avainten luovutus toimii ilman älylukkoja?", a: "Hoituu – käymme itse luovuttamassa avaimet tai käytämme turvallista avainlaatikkoa. Avainpalvelu on yksi erikoisuuksistamme: se on sujuvaa, ammattimaista ja henkilökohtaista." },
               { q: "Mitä jos kohteessani sattuu vahinko?", a: "Airbnb AirCover kattaa jopa 3 M€ asti omaisuusvahingot. Booking.com:lla on oma vakuutusjärjestelmänsä. Me dokumentoimme jokaisen vaihdon, reklamoimme ja hoidamme korvauksen puolestasi." },
-              { q: "Kuinka paljon kohteeni tuottaa Oulussa?", a: "Oulun yksiö tuottaa lyhytvuokrauksessa tyypillisesti 1 200–2 000 €/kk ennen provisiotamme, kun käyttöaste on 60–75 %. Oulu2026-vuonna kasvupotentiaali on erityisen suuri. Saat ilmaisen arvion meiltä." },
+              { q: "Kuinka paljon kohteeni tuottaa Oulussa?", a: "Tuotto riippuu kohteen sijainnista, koosta, kunnosta ja käyttöasteesta, joten emme anna yleispäteviä lukuja etukäteen. Ota yhteyttä, niin käymme läpi juuri sinun kohteesi mahdollisuudet henkilökohtaisesti." },
               { q: "Onko sopimuksessa pitkä sitoutumisaika?", a: "Ei. Yhteistyö perustuu kuukausi kerrallaan -malliin – ei pitkiä sitoutumisia. Voit lopettaa yhteistyön 30 päivän irtisanomisajalla milloin tahansa." },
               { q: "Hoidatteko myös verot ja kirjanpidon?", a: "Emme ole kirjanpitäjiä, mutta annamme selkeät kuukausiraportit kaikista tuloista, jotka tilitoit verottajalle. Suosittelemme käyttämään omaa tilitoimistoa veroilmoitukseen." },
               { q: "Mitä tapahtuu, jos en ole tyytyväinen?", a: "Puhumme asiasta ensin. Jos yhteistyö ei toimi, voit irtisanoa sopimuksen 30 päivän ilmoitusajalla. Ei sakkomaksuja, ei lukituksia. Asiakkaamme pysyvät koska haluavat – ei koska pakko." },
@@ -472,7 +458,7 @@ export default function KelvixHosting() {
             Kerro kohteestasi – saat ilmaisen tarjouksen 24 tunnin sisällä. Ei sitoumuksia.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap", marginBottom: 44 }}>
-            <BtnOrange onClick={() => go("yhteystiedot")}>Pyydä tarjousta <Arrow /></BtnOrange>
+            <BtnOrange onClick={() => go("yhteystiedot")}>Ota yhteyttä <Arrow /></BtnOrange>
             <motion.button whileHover={{ background: "rgba(255,255,255,0.12)", borderColor: "rgba(255,255,255,0.38)" }} onClick={() => go("hinnat")}
               style={{ background: "transparent", color: "#fff", border: "1.5px solid rgba(255,255,255,0.2)", borderRadius: 999, padding: "15px 30px", fontSize: 14, fontWeight: 600, cursor: "pointer" }}>
               Katso hinnat
@@ -490,11 +476,13 @@ export default function KelvixHosting() {
       </section>
     </>
   );
+}
 
-  /* ══════════════════════════════════════
-     PALVELUT
-  ══════════════════════════════════════ */
-  const Palvelut = () => (
+/* ══════════════════════════════════════
+   PALVELUT
+══════════════════════════════════════ */
+function Palvelut({ go }) {
+  return (
     <section style={{ ...W, paddingTop: "clamp(64px,8vw,100px)", paddingBottom: 80 }}>
       <R style={{ marginBottom: 56, textAlign: "center" }}>
         <Chip>Palvelut</Chip>
@@ -504,8 +492,7 @@ export default function KelvixHosting() {
       <Stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,320px),1fr))", gap: 22, marginBottom: 60 }}>
         {[
           { top: "Helppo aloitus", icon: <KeyIcon s={28} />, t: "Avainpalvelu", pr: "alk. 15 €/vaihto", desc: "Se alkuperäinen kipupiste ratkaistuna. Ei enää avainten juoksupoikana toimimista.", items: ["Avainten luovutus vieraalle sovittuna aikana","Henkilökohtainen vastaanotto ja opastus asuntoon","Avainten vastaanotto check-outissa ja kunnon tarkistus","Valokuvaraportti joka vaihdon jälkeen","Kuukausipaketti: 229 €/kk (10 vaihtoa), lisävaihdot 22 €/kpl"], feat: false },
-          { top: "Suosituin", icon: <Home s={28} />, t: "Täysi hallinta", pr: "25 % provisiolla", desc: "Me hoidamme kaiken alusta loppuun. Sinun ainoa tehtäväsi on seurata raporttia.", items: ["Ilmoitusten luonti, optimointi ja näkyvyyden maksimointi","Ammattimainen valokuvaus","AI-pohjainen dynaaminen hinnoittelu","Vierasviestintä 24/7 (FI/EN/DE)","Ammattimainen siivous jokaisen vieraan jälkeen","Puhtaat liinavaatteet ja perustarvikkeet","Huoltokoordinointi","Arvostelujen hallinta","Oulu2026-tapahtumahinnoittelu","Kuukausittainen tuottoraportti"], feat: true },
-          { top: "Itse tekeville", icon: <Star s={28} />, t: "Kevyt hallinta", pr: "15 % provisiolla", desc: "Sinä hoidat fyysisen puolen. Me hoidamme kaiken digitaalisen.", items: ["Ilmoitusten luonti, hallinta ja optimointi","Dynaaminen hinnoittelu","Vierasviestintä 24/7","Arvostelujen hallinta","Kuukausittainen tuottoraportti","Omistaja hoitaa itse siivouksen ja avaimet"], feat: false },
+          { top: "Suosituin", icon: <Home s={28} />, t: "Täysi hallinta", pr: "alkaen 25 % provisiolla", desc: "Me hoidamme kaiken alusta loppuun. Sinun ainoa tehtäväsi on seurata raporttia.", items: ["Ilmoitusten luonti, optimointi ja näkyvyyden maksimointi","Ammattimainen valokuvaus","AI-pohjainen dynaaminen hinnoittelu","Vierasviestintä 24/7 (FI/EN/DE)","Ammattimainen siivous jokaisen vieraan jälkeen","Puhtaat liinavaatteet ja perustarvikkeet","Huoltokoordinointi","Arvostelujen hallinta","Oulu2026-tapahtumahinnoittelu","Kuukausittainen tuottoraportti"], feat: true },
         ].map((p, i) => (
           <StaggerItem key={i}>
             <motion.div className={`kx-card-hover${p.feat ? " kx-card-featured" : ""}`}
@@ -516,7 +503,7 @@ export default function KelvixHosting() {
               <div style={{ fontSize: 15, fontWeight: 600, color: "#E06B00", marginBottom: 14 }}>{p.pr}</div>
               <p style={{ fontSize: 14, lineHeight: 1.7, color: "#666", marginBottom: 20 }}>{p.desc}</p>
               <ul style={{ listStyle: "none", padding: 0, margin: "0 0 24px", flex: 1 }}>{p.items.map((it, j) => <Li key={j}>{it}</Li>)}</ul>
-              <BtnOrange onClick={() => go("yhteystiedot")} full>Pyydä tarjousta <Arrow /></BtnOrange>
+              <BtnOrange onClick={() => go("yhteystiedot")} full>Ota yhteyttä <Arrow /></BtnOrange>
             </motion.div>
           </StaggerItem>
         ))}
@@ -539,11 +526,13 @@ export default function KelvixHosting() {
       </Stagger>
     </section>
   );
+}
 
-  /* ══════════════════════════════════════
-     HINNAT
-  ══════════════════════════════════════ */
-  const Hinnat = () => (
+/* ══════════════════════════════════════
+   HINNAT
+══════════════════════════════════════ */
+function Hinnat({ go }) {
+  return (
     <section style={{ ...W, paddingTop: "clamp(64px,8vw,100px)", paddingBottom: 80 }}>
       <R style={{ textAlign: "center", marginBottom: 56 }}>
         <Chip>Hinnoittelu</Chip>
@@ -554,8 +543,7 @@ export default function KelvixHosting() {
         {[
           { feat: false, lab: "Avainpalvelu", nm: "Perusvaihto", pr: "15 €", un: "/ vaihto · tutustumishinta", ft: ["Avainten luovutus ja vastaanotto","Ammattimainen vieraan opastus","Asunnon kunnon tarkistus","Valokuvaraportti omistajalle","Normaalihinta 25 €/vaihto uusille vaihtoille","Tutustumishinta on tarjolla rajoitetun ajan ensimmäisille asiakkaillemme."] },
           { feat: false, lab: "Avainpalvelu", nm: "Kuukausipaketti", pr: "229 €", un: "per kk · sis. 10 vaihtoa", ft: ["Kaikki perusvaihdon palvelut","10 vaihtoa kuukaudessa","Lisävaihdot vain 22 €/kpl","Ensisijainen palvelu"] },
-          { feat: true,  lab: "Hosting", nm: "Täysi hallinta", pr: "25 %", un: "provisiota bruttovuokratulosta", ft: ["Koko prosessi A:sta Ö:hön","Ilmoitukset, hinnoittelu, viestintä 24/7","Ammattimainen siivous & liinavaatteet","Huoltokoordinointi","Arvostelujen hallinta","AI-tapahtumahinnoittelu"] },
-          { feat: false, lab: "Hosting", nm: "Kevyt hallinta", pr: "15 %", un: "provisiota bruttovuokratulosta", ft: ["Ilmoitusten hallinta & optimointi","Dynaaminen hinnoittelu","Vierasviestintä 24/7","Arvostelujen hallinta","Omistaja hoitaa fyysisen puolen"] },
+          { feat: true,  lab: "Hosting", nm: "Täysi hallinta", pr: "alkaen 25 %", un: "provisiota bruttovuokratulosta", ft: ["Koko prosessi A:sta Ö:hön","Ilmoitukset, hinnoittelu, viestintä 24/7","Ammattimainen siivous & liinavaatteet","Huoltokoordinointi","Arvostelujen hallinta","AI-tapahtumahinnoittelu"] },
         ].map((p, i) => (
           <StaggerItem key={i}>
             <motion.div className={`kx-card-hover${p.feat ? " kx-card-featured" : ""}`}
@@ -567,35 +555,31 @@ export default function KelvixHosting() {
               <div style={{ fontSize: 13, color: p.feat ? "rgba(255,255,255,0.4)" : "#5A7088", marginBottom: 24 }}>{p.un}</div>
               {p.ft.map((ft, j) => <div key={j} style={{ display: "flex", alignItems: "flex-start", gap: 8, fontSize: 13, lineHeight: 1.6, color: p.feat ? "rgba(255,255,255,0.72)" : "#555", marginBottom: 9 }}><span style={{ color: "#E06B00", flexShrink: 0 }}><Check s={13} /></span>{ft}</div>)}
               <div style={{ marginTop: "auto", paddingTop: 24 }}>
-                <BtnOrange onClick={() => go("yhteystiedot")} full>Pyydä tarjousta <Arrow /></BtnOrange>
+                <BtnOrange onClick={() => go("yhteystiedot")} full>Ota yhteyttä <Arrow /></BtnOrange>
               </div>
             </motion.div>
           </StaggerItem>
         ))}
       </Stagger>
       <R>
-        <div style={{ background: "#fff", borderRadius: 20, padding: "clamp(24px,4vw,44px)", border: "1px solid rgba(12,35,64,0.09)" }}>
-          <h3 style={{ fontSize: 21, fontWeight: 700, marginBottom: 6, color: "#0C2340" }}>Esimerkki: yksiö Oulun keskustassa</h3>
-          <p style={{ fontSize: 13.5, color: "#5A7088", marginBottom: 28 }}>Yöhinta 85 €, käyttöaste 65 % – lyhytvuokra vs. pitkävuokra</p>
-          <Stagger style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,140px),1fr))", gap: 14 }}>
-            {[{ l: "Bruttotulo/kk", v: "~1 660 €" },{ l: "Kelvix (25 %)", v: "~415 €" },{ l: "Sinulle jää/kk", v: "~1 245 €", a: true },{ l: "Pitkävuokra tuottaisi", v: "~650 €" },{ l: "Lisätuottosi", v: "+91 %", a: true }].map((d, i) => (
-              <StaggerItem key={i}>
-                <div style={{ textAlign: "center", padding: 14 }}>
-                  <div style={{ fontSize: 11, color: "#5A7088", textTransform: "uppercase", letterSpacing: "1px", marginBottom: 6 }}>{d.l}</div>
-                  <div style={{ fontSize: d.a ? 30 : 24, fontWeight: 700, color: d.a ? "#E06B00" : "#0C2340" }}>{d.v}</div>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
+        <div style={{ background: "linear-gradient(135deg,#030710 0%,#0C2340 100%)", borderRadius: 24, padding: "clamp(36px,5vw,64px)", textAlign: "center", position: "relative", overflow: "hidden" }}>
+          <div style={{ position: "absolute", inset: 0, backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")", mixBlendMode: "overlay", pointerEvents: "none" }} />
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <h3 style={{ fontSize: "clamp(22px,3.5vw,32px)", fontWeight: 700, color: "#fff", marginBottom: 14, letterSpacing: "-0.5px" }}>Haluatko tietää mitä juuri sinun kohteesi voisi tuottaa?</h3>
+            <p style={{ fontSize: 15, color: "rgba(255,255,255,0.5)", maxWidth: 480, margin: "0 auto 30px", lineHeight: 1.7 }}>Ota yhteyttä, niin käymme läpi tilanteesi ja mahdollisuudet veloituksetta.</p>
+            <BtnOrange onClick={() => go("yhteystiedot")}>Ota yhteyttä <Arrow /></BtnOrange>
+          </div>
         </div>
       </R>
     </section>
   );
+}
 
-  /* ══════════════════════════════════════
-     MEISTÄ
-  ══════════════════════════════════════ */
-  const Meista = () => (
+/* ══════════════════════════════════════
+   MEISTÄ
+══════════════════════════════════════ */
+function Meista({ go }) {
+  return (
     <section style={{ ...W, paddingTop: "clamp(64px,8vw,100px)", paddingBottom: 80 }}>
       <R style={{ textAlign: "center", marginBottom: 56 }}>
         <Chip>Meistä</Chip>
@@ -624,76 +608,78 @@ export default function KelvixHosting() {
           <div style={{ position: "relative", zIndex: 1 }}>
             <h2 style={{ fontSize: "clamp(22px,3.5vw,34px)", fontWeight: 700, color: "#fff", marginBottom: 14, letterSpacing: "-0.5px" }}>Asuntosi ansaitsee parempaa<br />kuin tyhjää seisomista.</h2>
             <p style={{ fontSize: 15, color: "rgba(255,255,255,0.45)", maxWidth: 480, margin: "0 auto 30px" }}>Aloita vaikka pelkällä avainpalvelulla – tai anna meidän hoitaa kaikki.</p>
-            <BtnOrange onClick={() => go("yhteystiedot")}>Pyydä tarjousta <Arrow /></BtnOrange>
+            <BtnOrange onClick={() => go("yhteystiedot")}>Ota yhteyttä <Arrow /></BtnOrange>
           </div>
         </div>
       </R>
     </section>
   );
+}
 
-  /* ══════════════════════════════════════
-     YHTEYSTIEDOT
-  ══════════════════════════════════════ */
-  const Yhteystiedot = () => {
-    const [state, handleSubmit] = useForm("mwvyzyjv");
-    return (
-      <section style={{ ...W, paddingTop: "clamp(64px,8vw,100px)", paddingBottom: 80 }}>
-        <R style={{ textAlign: "center", marginBottom: 52 }}>
-          <Chip>Ota yhteyttä</Chip>
-          <H2>Pyydä ilmainen tarjous</H2>
-          <p style={{ fontSize: 16, color: "#5A7088", lineHeight: 1.75, maxWidth: 480, margin: "0 auto" }}>Vastaamme jokaiseen yhteydenottoon 24 tunnin sisällä. Ei sido sinua mihinkään.</p>
+/* ══════════════════════════════════════
+   YHTEYSTIEDOT
+══════════════════════════════════════ */
+function Yhteystiedot() {
+  const [state, handleSubmit] = useForm("mwvyzyjv");
+  return (
+    <section style={{ ...W, paddingTop: "clamp(64px,8vw,100px)", paddingBottom: 80 }}>
+      <R style={{ textAlign: "center", marginBottom: 52 }}>
+        <Chip>Ota yhteyttä</Chip>
+        <H2>Pyydä ilmainen tarjous</H2>
+        <p style={{ fontSize: 16, color: "#5A7088", lineHeight: 1.75, maxWidth: 480, margin: "0 auto" }}>Vastaamme jokaiseen yhteydenottoon 24 tunnin sisällä. Ei sido sinua mihinkään.</p>
+      </R>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,300px),1fr))", gap: 56, marginBottom: 80 }}>
+        <R>
+          {state.succeeded ? (
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} style={{ background: "rgba(224,107,0,0.05)", borderRadius: 20, padding: 48, textAlign: "center", border: "1px solid rgba(224,107,0,0.16)" }}>
+              <div style={{ fontSize: 56, marginBottom: 16, color: "#E06B00" }}>✓</div>
+              <div style={{ fontSize: 22, fontWeight: 700, marginBottom: 10, color: "#0C2340" }}>Kiitos yhteydenotosta!</div>
+              <p style={{ color: "#666", fontSize: 15, lineHeight: 1.7 }}>Palaamme asiaan 24 tunnin sisällä.</p>
+            </motion.div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#0C2340", marginBottom: 6 }}>Nimesi *</label>
+              <input style={inp} placeholder="Etunimi Sukunimi" name="name" required />
+              <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#0C2340", marginBottom: 6 }}>Sähköposti *</label>
+              <input style={inp} placeholder="sinä@esimerkki.fi" type="email" name="email" required />
+              <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#0C2340", marginBottom: 6 }}>Puhelinnumero</label>
+              <input style={inp} placeholder="040 123 4567" name="puhelinnumero" />
+              <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#0C2340", marginBottom: 6 }}>Kohteesi</label>
+              <textarea style={{ ...inp, minHeight: 130, resize: "vertical" }} placeholder="Kerro kohteestasi - osoite, huoneiden määrä, onko jo Airbnb:ssä" name="viesti" />
+              <BtnOrange full>
+                {state.submitting ? "Lähetetään…" : <><span>Ota yhteyttä</span><Arrow /></>}
+              </BtnOrange>
+            </form>
+          )}
         </R>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(min(100%,300px),1fr))", gap: 56, marginBottom: 80 }}>
-          <R>
-            {state.succeeded ? (
-              <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} style={{ background: "rgba(224,107,0,0.05)", borderRadius: 20, padding: 48, textAlign: "center", border: "1px solid rgba(224,107,0,0.16)" }}>
-                <div style={{ fontSize: 56, marginBottom: 16, color: "#E06B00" }}>✓</div>
-                <div style={{ fontSize: 22, fontWeight: 700, marginBottom: 10, color: "#0C2340" }}>Kiitos yhteydenotosta!</div>
-                <p style={{ color: "#666", fontSize: 15, lineHeight: 1.7 }}>Palaamme asiaan 24 tunnin sisällä.</p>
-              </motion.div>
-            ) : (
-              <form onSubmit={handleSubmit}>
-                <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#0C2340", marginBottom: 6 }}>Nimesi *</label>
-                <input style={inp} placeholder="Etunimi Sukunimi" name="name" required />
-                <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#0C2340", marginBottom: 6 }}>Sähköposti *</label>
-                <input style={inp} placeholder="sinä@esimerkki.fi" type="email" name="email" required />
-                <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#0C2340", marginBottom: 6 }}>Puhelinnumero</label>
-                <input style={inp} placeholder="040 123 4567" name="puhelinnumero" />
-                <label style={{ display: "block", fontSize: 13, fontWeight: 600, color: "#0C2340", marginBottom: 6 }}>Kohteesi</label>
-                <textarea style={{ ...inp, minHeight: 130, resize: "vertical" }} placeholder="Kerro kohteestasi - osoite, huoneiden määrä, onko jo Airbnb:ssä" name="viesti" />
-                <BtnOrange full>
-                  {state.submitting ? "Lähetetään…" : <><span>Pyydä tarjousta</span><Arrow /></>}
-                </BtnOrange>
-              </form>
-            )}
-          </R>
-          <R delay={0.12}>
-            <div style={{ fontSize: 20, fontWeight: 700, color: "#0C2340", marginBottom: 16 }}>Kelvix Hosting</div>
-            <p style={{ fontSize: 14.5, color: "#666", lineHeight: 1.75, marginBottom: 24 }}>Oulun ensimmäinen ammattimainen lyhytvuokrauksen hosting-palvelu. Sinä nautit tuotoista – me hoidamme kaiken muun.</p>
-            {[
-              { ic: <Mail s={20} />, t: EMAIL, href: `mailto:${EMAIL}` },
-              { ic: <Phone s={20} />, t: PHONE, href: `tel:${PHONE.replace(/\s/g,"")}` },
-              { ic: <MapPin s={20} />, t: "Oulu ja lähialueet", href: null },
-            ].map((c, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: 13, marginBottom: 16 }}>
-                <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(12,35,64,0.06)", color: "#0C2340", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{c.ic}</div>
-                {c.href ? <a href={c.href} style={{ fontSize: 14.5, color: "#0C2340", textDecoration: "none" }}>{c.t}</a> : <span style={{ fontSize: 14.5, color: "#555" }}>{c.t}</span>}
-              </div>
-            ))}
-            <div style={{ marginTop: 16, padding: "20px 22px", background: "rgba(27,58,75,0.03)", borderRadius: 14, border: "1px solid rgba(12,35,64,0.08)" }}>
-              <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 6, color: "#0C2340" }}>Ilmainen tarjous 24 h sisällä</div>
-              <p style={{ fontSize: 13, color: "#777", margin: 0, lineHeight: 1.6 }}>Jokainen yhteydenotto saa henkilökohtaisen vastauksen. Ei riskiä, ei velvoitteita.</p>
+        <R delay={0.12}>
+          <div style={{ fontSize: 20, fontWeight: 700, color: "#0C2340", marginBottom: 16 }}>Kelvix Hosting</div>
+          <p style={{ fontSize: 14.5, color: "#666", lineHeight: 1.75, marginBottom: 24 }}>Oulun ensimmäinen ammattimainen lyhytvuokrauksen hosting-palvelu. Sinä nautit tuotoista – me hoidamme kaiken muun.</p>
+          {[
+            { ic: <Mail s={20} />, t: EMAIL, href: `mailto:${EMAIL}` },
+            { ic: <Phone s={20} />, t: PHONE, href: `tel:${PHONE.replace(/\s/g,"")}` },
+            { ic: <MapPin s={20} />, t: "Oulu ja lähialueet", href: null },
+          ].map((c, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 13, marginBottom: 16 }}>
+              <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(12,35,64,0.06)", color: "#0C2340", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>{c.ic}</div>
+              {c.href ? <a href={c.href} style={{ fontSize: 14.5, color: "#0C2340", textDecoration: "none" }}>{c.t}</a> : <span style={{ fontSize: 14.5, color: "#555" }}>{c.t}</span>}
             </div>
-          </R>
-        </div>
-      </section>
-    );
-  };
+          ))}
+          <div style={{ marginTop: 16, padding: "20px 22px", background: "rgba(27,58,75,0.03)", borderRadius: 14, border: "1px solid rgba(12,35,64,0.08)" }}>
+            <div style={{ fontSize: 13, fontWeight: 700, marginBottom: 6, color: "#0C2340" }}>Ilmainen tarjous 24 h sisällä</div>
+            <p style={{ fontSize: 13, color: "#777", margin: 0, lineHeight: 1.6 }}>Jokainen yhteydenotto saa henkilökohtaisen vastauksen. Ei riskiä, ei velvoitteita.</p>
+          </div>
+        </R>
+      </div>
+    </section>
+  );
+}
 
-  /* ══════════════════════════════════════
-     TIETOSUOJA
-  ══════════════════════════════════════ */
-  const Tietosuoja = () => (
+/* ══════════════════════════════════════
+   TIETOSUOJA
+══════════════════════════════════════ */
+function Tietosuoja() {
+  return (
     <section style={{ ...W, paddingTop: "clamp(64px,8vw,100px)", paddingBottom: 80 }}>
       <R style={{ marginBottom: 48 }}>
         <Chip>Tietosuoja</Chip>
@@ -721,11 +707,13 @@ export default function KelvixHosting() {
       ))}
     </section>
   );
+}
 
-  /* ══════════════════════════════════════
-     FOOTER
-  ══════════════════════════════════════ */
-  const Footer = () => (
+/* ══════════════════════════════════════
+   FOOTER
+══════════════════════════════════════ */
+function Footer({ go }) {
+  return (
     <footer style={{ background: "#030710", color: "#fff", padding: "64px clamp(20px,5vw,60px) 32px", position: "relative", overflow: "hidden" }}>
       <div style={{ position: "absolute", inset: 0, backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")", mixBlendMode: "overlay", pointerEvents: "none" }} />
       <div style={{ position: "absolute", width: 420, height: 420, borderRadius: "50%", background: "radial-gradient(circle,rgba(206,136,64,0.1),transparent 70%)", top: -140, right: -120, pointerEvents: "none" }} />
@@ -740,7 +728,7 @@ export default function KelvixHosting() {
           </div>
           <div>
             <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "2px", color: "rgba(255,255,255,0.4)", fontWeight: 600, marginBottom: 14 }}>Palvelut</div>
-            {["Avainpalvelu","Täysi hallinta","Kevyt hallinta","Valokuvaus"].map((t, i) => (
+            {["Avainpalvelu","Täysi hallinta","Valokuvaus"].map((t, i) => (
               <div key={i} onClick={() => go("palvelut")} style={{ fontSize: 14, color: "rgba(255,255,255,0.65)", marginBottom: 10, cursor: "pointer", transition: "color 0.2s" }}>{t}</div>
             ))}
           </div>
@@ -754,7 +742,7 @@ export default function KelvixHosting() {
             <div style={{ fontSize: 11, textTransform: "uppercase", letterSpacing: "2px", color: "rgba(255,255,255,0.4)", fontWeight: 600, marginBottom: 14 }}>Yhteystiedot</div>
             <a href={`mailto:${EMAIL}`} style={{ display: "block", fontSize: 13.5, color: "rgba(255,255,255,0.65)", marginBottom: 10, textDecoration: "none" }}>{EMAIL}</a>
             <a href={`tel:${PHONE.replace(/\s/g,"")}`} style={{ display: "block", fontSize: 13.5, color: "rgba(255,255,255,0.65)", marginBottom: 16, textDecoration: "none" }}>{PHONE}</a>
-            <BtnOrange onClick={() => go("yhteystiedot")} style={{ padding: "11px 22px", fontSize: 13 }}>Pyydä tarjousta <Arrow s={14} /></BtnOrange>
+            <BtnOrange onClick={() => go("yhteystiedot")} style={{ padding: "11px 22px", fontSize: 13 }}>Ota yhteyttä <Arrow s={14} /></BtnOrange>
           </div>
         </div>
         <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", paddingTop: 24, display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "space-between", alignItems: "center", fontSize: 12, color: "rgba(255,255,255,0.38)" }}>
@@ -768,10 +756,23 @@ export default function KelvixHosting() {
       </div>
     </footer>
   );
+}
 
-  /* ══════════════════════════════════════
-     RENDER
-  ══════════════════════════════════════ */
+/* ══════════════════════════════════════
+   MAIN COMPONENT
+══════════════════════════════════════ */
+export default function KelvixHosting() {
+  const [page, setPage] = useState("etusivu");
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [faqOpen, setFaqOpen] = useState(null);
+  const spotRef = useRef(null);
+  const { scrollY } = useScroll();
+
+  useEffect(() => scrollY.on("change", v => setScrolled(v > 50)), [scrollY]);
+
+  const go = (p) => { setPage(p); setMenuOpen(false); setFaqOpen(null); window.scrollTo({ top: 0, behavior: "instant" }); };
+
   return (
     <>
       <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,700;1,800&display=swap" rel="stylesheet" />
@@ -822,13 +823,13 @@ export default function KelvixHosting() {
 
       {/* PAGE CONTENT */}
       <main>
-        {page === "etusivu"     && <Etusivu />}
-        {page === "palvelut"    && <Palvelut />}
-        {page === "hinnat"      && <Hinnat />}
-        {page === "meista"      && <Meista />}
+        {page === "etusivu"     && <Etusivu go={go} spotRef={spotRef} faqOpen={faqOpen} setFaqOpen={setFaqOpen} />}
+        {page === "palvelut"    && <Palvelut go={go} />}
+        {page === "hinnat"      && <Hinnat go={go} />}
+        {page === "meista"      && <Meista go={go} />}
         {page === "yhteystiedot"&& <Yhteystiedot />}
         {page === "tietosuoja"  && <Tietosuoja />}
-        <Footer />
+        <Footer go={go} />
       </main>
     </>
   );
